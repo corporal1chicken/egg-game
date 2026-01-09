@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://kbv7umdpp48d"]
+
+[ext_resource type="PackedScene" uid="uid://c0xvhxeo521u2" path="res://scenes/clicker/clicker.tscn" id="1_3ga5c"]
+
+[node name="ui_controller" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="clicker" parent="CanvasLayer" instance=ExtResource("1_3ga5c")]

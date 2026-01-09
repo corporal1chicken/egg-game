@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0xvhxeo521u2"]
+
+[ext_resource type="Script" uid="uid://du4d411gkcehf" path="res://scenes/clicker/clicker.gd" id="1_3yhdj"]
+[ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_7l5xg"]
+[ext_resource type="StyleBox" uid="uid://lvy001rveyr4" path="res://resources/buttons/disabled.tres" id="3_8oacq"]
+
+[sub_resource type="Animation" id="Animation_8oacq"]
+resource_name = "unlocked_autoegg"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("locked_panel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(12, 518), Vector2(12, 496), Vector2(12, 672)]
+}
+
+[sub_resource type="Animation" id="Animation_umt6m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("locked_panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, 518)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g5i5g"]
+_data = {
+&"RESET": SubResource("Animation_umt6m"),
+&"unlocked_autoegg": SubResource("Animation_8oacq")
+}
+
+[node name="clicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7l5xg")
+script = ExtResource("1_3yhdj")
+
+[node name="main_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -55.0
+offset_right = 164.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 54
+text = "click me"
+
+[node name="enable_auto" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -559.0
+offset_top = 240.0
+offset_right = -347.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_8oacq")
+text = "auto egg"
+
+[node name="egg_counter" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_left = 29.0
+offset_top = 34.0
+offset_right = 228.0
+offset_bottom = 82.0
+theme_override_font_sizes/normal_font_size = 32
+text = "eggs: 0"
+
+[node name="auto_rate" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = -120.0
+offset_right = 214.0
+offset_bottom = -88.0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 20
+text = "5.0 eggs / 3.0s"
+
+[node name="locked_panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -130.0
+offset_right = 233.0
+offset_bottom = -6.000305
+grow_vertical = 0
+color = Color(0.44313726, 0.44313726, 0.44313726, 0.7058824)
+
+[node name="unlock_text" type="RichTextLabel" parent="locked_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "locked
+20 eggs required"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g5i5g")
+}
+
+[connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]
+[connection signal="pressed" from="enable_auto" to="." method="_on_enable_auto_pressed"]
