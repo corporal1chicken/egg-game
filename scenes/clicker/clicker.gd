@@ -6,6 +6,7 @@ extends Control
 var stats = PlayerData.stats
 
 var auto_active: bool = false
+var upgrades_open: bool = false
 
 # Godot Specific Functions
 func _ready():
@@ -23,6 +24,10 @@ func _on_timer_timeout():
 func _on_main_button_pressed():
 	if auto_active:
 		_disable_autoegg()
+		
+	if upgrades_open:
+		upgrades_open = false
+		_play_animation("open_upgrades", "backwards")
 	
 	PlayerData.increase_eggs(stats.eggs_per_click)
 
@@ -31,6 +36,14 @@ func _on_enable_auto_pressed():
 		_disable_autoegg()
 	else:
 		_enable_autoegg()
+		
+func _on_open_upgrades_pressed():
+	if upgrades_open:
+		upgrades_open = false
+		_play_animation("open_upgrades", "backwards")
+	else:
+		upgrades_open = true
+		_play_animation("open_upgrades", "forwards")
 
 # Helper Functions
 func _enable_autoegg():
@@ -45,8 +58,29 @@ func _disable_autoegg():
 
 func _on_change_total_eggs():
 	$egg_counter.text = "eggs: %.1f" % [stats.total_eggs]
+	
+	var possible_upgrades: int = 0
+	
+	for child in $upgrades/VBoxContainer.get_children():
+		if child.can_upgrade:
+			possible_upgrades += 1
+	
+	if possible_upgrades != 0:
+		$upgrades/possible_upgrades.visible = true
+		$upgrades/possible_upgrades.text = "(%d)" % [possible_upgrades]
+	else:
+		$upgrades/possible_upgrades.visible = false
+
+func _play_animation(animation_name: String, direction: String):
+	if animation_player.is_playing():
+		await animation_player.animation_finished
+	
+	if direction == "forwards":
+		animation_player.play(animation_name)
+	else:
+		animation_player.play_backwards(animation_name)
 
 # Main Functions		
 func _on_unlock(unlock: String):
 	if unlock == "autoegg":
-		$AnimationPlayer.play("unlocked_autoegg")
+		_play_animation("unlocked_autoegg", "forwards")

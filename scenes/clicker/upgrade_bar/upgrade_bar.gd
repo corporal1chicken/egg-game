@@ -6,14 +6,32 @@ extends ColorRect
 @export var upgrade_index: int = 0
 @export var max_upgrades: int = 0
 @export var path_completed: bool = false
+@export var path: Dictionary = {
+	unlocked = false,
+	cost = 0.0,
+	text = "None Set",
+	type = ""
+}
 
+var can_upgrade: bool = false
 var current_upgrade: Upgrade
 
 # Built In Godot Functions
 func _ready() -> void:
+	Signals.new_unlock.connect(_check_dependency)
+	Signals.change_total_eggs.connect(_on_change_total_eggs)
+	
 	current_upgrade = upgrade_path.get(upgrade_index)
+	max_upgrades = upgrade_path.keys().size()
 	
 	_update_upgrade_text()
+	
+	if not path.unlocked:
+		$status/unlock.text = path.text
+		$status.visible = true
+		
+		if path.type == "dependent":
+			$status/unlock.disabled = true
 
 # Button Functions
 func _on_upgrade_mouse_entered() -> void:
@@ -21,6 +39,12 @@ func _on_upgrade_mouse_entered() -> void:
 
 func _on_upgrade_mouse_exited() -> void:
 	$upgrade/hover.visible = false
+
+func _on_unlock_pressed() -> void:
+	if PlayerData.stats.total_eggs >= path.cost:
+		_unlock_path()
+	else:
+		print("not enough eggs for path")
 
 func _on_upgrade_pressed() -> void:
 	if current_upgrade.cost <= PlayerData.stats.total_eggs:
@@ -44,3 +68,23 @@ func _check_upgrade_path_completed():
 	else:
 		current_upgrade = upgrade_path.get(upgrade_index)
 		_update_upgrade_text()
+		
+func _unlock_path():
+	path.unlocked = true
+	$status.visible = false
+	
+	if path.cost != -1.0:
+		PlayerData.decrease_eggs(path.cost)
+
+func _check_dependency(unlock: String):
+	if path.type == "dependency":
+		if unlock == path.needs:
+			_unlock_path()
+
+func _on_change_total_eggs():
+	if not path.unlocked: return
+	
+	if current_upgrade.cost <= PlayerData.stats.total_eggs:
+		can_upgrade = true
+	else:
+		can_upgrade = false

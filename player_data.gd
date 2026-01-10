@@ -5,6 +5,7 @@ var stats: Dictionary = {
 	eggs_per_click = 1.0,
 	eggs_per_auto = 0.5,
 	auto_eggs_per_tick = 2.0,
+	click_multiplier = 1.0,
 	
 	autoegg_unlocked = false
 }
@@ -13,12 +14,15 @@ func _ready():
 	Signals.new_upgrade.connect(_on_upgrade)
 	
 func increase_eggs(value: float):
-	stats.total_eggs += value
+	stats.total_eggs += (value * stats.click_multiplier)
+	Signals.change_total_eggs.emit()
+	
+func decrease_eggs(value: float):
+	stats.total_eggs -= value
 	Signals.change_total_eggs.emit()
 
 func _on_upgrade(change: Dictionary, cost: float):
-	stats.total_eggs -= cost
-	Signals.change_total_eggs.emit()
+	decrease_eggs(cost)
 	
 	match change.type:
 		"stat_change":
@@ -28,3 +32,4 @@ func _on_upgrade(change: Dictionary, cost: float):
 			
 			if change.gives == "autoegg":
 				stats.autoegg_unlocked = true
+			
