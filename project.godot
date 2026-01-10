@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 ButtonStyles="*res://autoloads/button_styles.gd"
-Signals="*res://signals.gd"
-PlayerData="*res://player_data.gd"
+Signals="*res://autoloads/signals.gd"
+PlayerData="*res://autoloads/player_data.gd"
 
 [gui]
 

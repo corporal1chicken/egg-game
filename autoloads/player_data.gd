@@ -10,6 +10,11 @@ var stats: Dictionary = {
 	autoegg_unlocked = false
 }
 
+var settings: Dictionary = {
+	close_upgrade = false,
+	hide_decimals = false
+}
+
 func _ready():
 	Signals.new_upgrade.connect(_on_upgrade)
 	
@@ -23,7 +28,7 @@ func decrease_eggs(value: float):
 
 func _on_upgrade(change: Dictionary, cost: float):
 	decrease_eggs(cost)
-	
+
 	match change.type:
 		"stat_change":
 			stats[change.stat] += change.amount
@@ -32,4 +37,6 @@ func _on_upgrade(change: Dictionary, cost: float):
 			
 			if change.gives == "autoegg":
 				stats.autoegg_unlocked = true
-			
+
+func change_setting(setting: String, new_value):
+	settings[setting] = new_value

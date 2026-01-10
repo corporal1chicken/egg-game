@@ -27,12 +27,14 @@ func _ready() -> void:
 	_update_upgrade_text()
 	
 	if not path.unlocked:
-		$status/unlock.text = path.text
-		$status.visible = true
-		
-		if path.type == "dependent":
-			$status/unlock.disabled = true
-
+		if path.type == "dependency":
+			$status.visible = true
+			$path_level.visible = false
+		else:
+			$purchase/unlock.text = path.text
+			$purchase.visible = true
+			$path_level.visible = false
+			
 # Button Functions
 func _on_upgrade_mouse_entered() -> void:
 	$upgrade/hover.visible = true
@@ -59,12 +61,17 @@ func _update_upgrade_text():
 	$upgrade_name.text = upgrade_name
 	$upgrade/hover.text = current_upgrade.description
 	$upgrade.text = "%.1f eggs" % [current_upgrade.cost]
+	$path_level.text = "(%d/%d)" % [upgrade_index, max_upgrades]
 
 func _check_upgrade_path_completed():
 	upgrade_index += 1
 	
 	if upgrade_index >= max_upgrades:
-		queue_free()
+		$status.visible = true
+		$status.color = Color.GREEN
+		$status.color.a = 0.5
+		$path_level.visible = false
+		$status/label.text = "Path Completed!"
 	else:
 		current_upgrade = upgrade_path.get(upgrade_index)
 		_update_upgrade_text()
@@ -72,6 +79,8 @@ func _check_upgrade_path_completed():
 func _unlock_path():
 	path.unlocked = true
 	$status.visible = false
+	$purchase.visible = false
+	$path_level.visible = true
 	
 	if path.cost != -1.0:
 		PlayerData.decrease_eggs(path.cost)
@@ -86,5 +95,7 @@ func _on_change_total_eggs():
 	
 	if current_upgrade.cost <= PlayerData.stats.total_eggs:
 		can_upgrade = true
+		$path_level.add_theme_color_override("default_color", Color.GREEN)
 	else:
 		can_upgrade = false
+		$path_level.add_theme_color_override("default_color", Color.WHITE)

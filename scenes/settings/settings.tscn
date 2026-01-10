@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbi28ckatdmln"]
+
+[ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_vu5fi"]
+[ext_resource type="Script" uid="uid://d2d7fqnj1afdg" path="res://scenes/settings/settings.gd" id="2_tt6xx"]
+[ext_resource type="PackedScene" uid="uid://crgnmw0y82qrg" path="res://scenes/settings/toggle/setting.tscn" id="3_tt6xx"]
+
+[node name="settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vu5fi")
+script = ExtResource("2_tt6xx")
+
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -547.0
+offset_top = 30.0
+offset_right = 547.0
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 60
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="close_upgrade_tab" parent="." instance=ExtResource("3_tt6xx")]
+layout_mode = 1
+title = "Close Upgrades"
+description = "Close the upgrade tab when you click the egg"
+setting_name = "close_upgrade"

@@ -25,7 +25,7 @@ func _on_main_button_pressed():
 	if auto_active:
 		_disable_autoegg()
 		
-	if upgrades_open:
+	if upgrades_open and PlayerData.settings.close_upgrade:
 		upgrades_open = false
 		_play_animation("open_upgrades", "backwards")
 	
@@ -58,7 +58,7 @@ func _disable_autoegg():
 
 func _on_change_total_eggs():
 	$egg_counter.text = "eggs: %.1f" % [stats.total_eggs]
-	
+
 	var possible_upgrades: int = 0
 	
 	for child in $upgrades/VBoxContainer.get_children():
@@ -74,7 +74,7 @@ func _on_change_total_eggs():
 func _play_animation(animation_name: String, direction: String):
 	if animation_player.is_playing():
 		await animation_player.animation_finished
-	
+
 	if direction == "forwards":
 		animation_player.play(animation_name)
 	else:
