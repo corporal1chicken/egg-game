@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://kbv7umdpp48d"]
+[gd_scene load_steps=4 format=3 uid="uid://kbv7umdpp48d"]
 
 [ext_resource type="PackedScene" uid="uid://c0xvhxeo521u2" path="res://scenes/clicker/clicker.tscn" id="1_3ga5c"]
+[ext_resource type="Script" uid="uid://cifkx8e5q2e46" path="res://signals.gd" id="2_1ajqp"]
+[ext_resource type="Script" uid="uid://c7fblmfu21r8l" path="res://player_data.gd" id="3_rlpp8"]
 
 [node name="ui_controller" type="Control"]
 layout_mode = 3
@@ -13,3 +15,9 @@ grow_vertical = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="clicker" parent="CanvasLayer" instance=ExtResource("1_3ga5c")]
+
+[node name="signals" type="Node" parent="."]
+script = ExtResource("2_1ajqp")
+
+[node name="player_data" type="Node" parent="."]
+script = ExtResource("3_rlpp8")

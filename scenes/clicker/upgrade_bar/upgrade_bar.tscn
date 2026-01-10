@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq54hofjabav5"]
+
+[ext_resource type="Script" uid="uid://cdl5orgv4asy3" path="res://scenes/clicker/upgrade_bar/upgrade_bar.gd" id="1_l0ec4"]
+[ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_t5ou8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ywwv"]
+
+[node name="upgrade_bar" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 417.0
+offset_top = 288.0
+offset_right = -417.0
+offset_bottom = -288.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_t5ou8")
+color = Color(0.34781694, 0.34781697, 0.3478169, 1)
+script = ExtResource("1_l0ec4")
+
+[node name="upgrade_name" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 106.0
+offset_top = 16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "text goes here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="upgrade" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -15.0
+offset_right = 104.0
+offset_bottom = 16.0
+grow_vertical = 2
+text = "20 eggs"
+
+[node name="hover" type="RichTextLabel" parent="upgrade"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -189.0
+offset_top = -23.5
+offset_right = -13.0
+offset_bottom = 23.5
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ywwv")
+text = "description goes here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="upgrade" to="." method="_on_upgrade_mouse_entered"]
+[connection signal="mouse_exited" from="upgrade" to="." method="_on_upgrade_mouse_exited"]
+[connection signal="pressed" from="upgrade" to="." method="_on_upgrade_pressed"]

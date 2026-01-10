@@ -1,36 +1,30 @@
 extends Control
 
-var unlocks: Dictionary = {
-	"autoegg" = 20.0
-}
-
-var eggs: float = 0.0
-var auto_active: bool = false
-
-var auto_tick: float = 2.0
-var auto_egg_amount: float = 0.5
-
-var click_egg_amount: float = 1.0
-
 @onready var timer: Timer = $Timer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+var stats = PlayerData.stats
+
+var auto_active: bool = false
 
 # Godot Specific Functions
 func _ready():
 	timer.timeout.connect(_on_timer_timeout)
+	Signals.new_unlock.connect(_on_unlock)
+	Signals.change_total_eggs.connect(_on_change_total_eggs)
 	
-	$auto_rate.text = "%.1f eggs / %.1fs" % [auto_egg_amount, auto_tick]
+	$auto_rate.text = "%.1f eggs / %.1fs" % [stats.eggs_per_auto, stats.auto_eggs_per_tick]
 	
 func _on_timer_timeout():
 	if auto_active:
-		_give_egg(auto_egg_amount)
+		PlayerData.increase_eggs(stats.eggs_per_auto)
 
 # Button Press Functions
 func _on_main_button_pressed():
 	if auto_active:
 		_disable_autoegg()
 	
-	_give_egg(click_egg_amount)
+	PlayerData.increase_eggs(stats.eggs_per_click)
 
 func _on_enable_auto_pressed():
 	if auto_active:
@@ -41,25 +35,18 @@ func _on_enable_auto_pressed():
 # Helper Functions
 func _enable_autoegg():
 	auto_active = true
-	timer.start(auto_tick)
+	timer.start(stats.auto_eggs_per_tick)
 	ButtonStyles.change_style($enable_auto, "normal", "enabled")
 	
 func _disable_autoegg():
 	auto_active = false
 	timer.stop()
 	ButtonStyles.change_style($enable_auto, "normal", "disabled")
-	
-func _check_unlock():
-	for key in unlocks.keys():
-		var egg_requirement = unlocks.get(key)
-		
-		if egg_requirement == eggs:
-			if key == "autoegg":
-				animation_player.play("unlocked_autoegg")
 
-# Main Functions	
-func _give_egg(egg_amount: float):
-	eggs += egg_amount
-	$egg_counter.text = "eggs: %.1f" % [eggs]
-	
-	_check_unlock()
+func _on_change_total_eggs():
+	$egg_counter.text = "eggs: %.1f" % [stats.total_eggs]
+
+# Main Functions		
+func _on_unlock(unlock: String):
+	if unlock == "autoegg":
+		$AnimationPlayer.play("unlocked_autoegg")
