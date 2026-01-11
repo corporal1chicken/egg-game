@@ -13,12 +13,10 @@ func _ready():
 	timer.timeout.connect(_on_timer_timeout)
 	Signals.new_unlock.connect(_on_unlock)
 	Signals.change_total_eggs.connect(_on_change_total_eggs)
-	
-	$auto_rate.text = "%.1f eggs / %.1fs" % [stats.eggs_per_auto, stats.auto_eggs_per_tick]
-	
+
 func _on_timer_timeout():
 	if auto_active:
-		PlayerData.increase_eggs(stats.eggs_per_auto)
+		PlayerData.increase_eggs("auto", stats.eggs_per_auto)
 
 # Button Press Functions
 func _on_main_button_pressed():
@@ -29,7 +27,7 @@ func _on_main_button_pressed():
 		upgrades_open = false
 		_play_animation("open_upgrades", "backwards")
 	
-	PlayerData.increase_eggs(stats.eggs_per_click)
+	PlayerData.increase_eggs("click", stats.eggs_per_click)
 
 func _on_enable_auto_pressed():
 	if auto_active:
@@ -48,7 +46,7 @@ func _on_open_upgrades_pressed():
 # Helper Functions
 func _enable_autoegg():
 	auto_active = true
-	timer.start(stats.auto_eggs_per_tick)
+	timer.start(stats.auto_eggs_rate)
 	ButtonStyles.change_style($enable_auto, "normal", "enabled")
 	
 func _disable_autoegg():
@@ -67,7 +65,10 @@ func _on_change_total_eggs():
 	
 	var possible_upgrades: int = 0
 	
-	for child in $upgrades/VBoxContainer.get_children():
+	for child in $upgrades.get_children():
+		if child.name == "open_upgrades" or child.name == "possible_upgrades":
+			continue
+		
 		if child.can_upgrade:
 			possible_upgrades += 1
 	

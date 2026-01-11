@@ -2,12 +2,19 @@ extends Node
 
 var stats: Dictionary = {
 	total_eggs = 0.0,
+	lifetime_eggs = 0.0,
+	
 	eggs_per_click = 1.0,
-	eggs_per_auto = 0.5,
-	auto_eggs_per_tick = 2.0,
 	click_multiplier = 1.0,
 	
-	multiplier = 0.0,
+	eggs_per_auto = 0.5,
+	auto_eggs_rate = 2.0,
+	auto_multiplier = 1.0,
+	
+	total_multiplier = 1.0,
+	
+	double_egg_cooldown = 30.0,
+	double_egg_length = 10.0,
 	
 	autoegg_unlocked = false
 }
@@ -20,9 +27,21 @@ var settings: Dictionary = {
 func _ready():
 	Signals.new_upgrade.connect(_on_upgrade)
 	
-func increase_eggs(value: float):
-	stats.total_eggs += (value * stats.click_multiplier) * stats.multiplier
+func increase_eggs(gain_type: String, value: float):
+	var amount_to_add: float = 0.0
+	
+	match gain_type:
+		"click":
+			amount_to_add = (value * stats.click_multiplier)
+		"auto":
+			amount_to_add = (value * stats.auto_multiplier)
+	
+	stats.total_eggs += (amount_to_add * stats.total_multiplier)
+	stats.lifetime_eggs += amount_to_add * stats.total_multiplier
 	Signals.change_total_eggs.emit()
+	
+	if stats.lifetime_eggs >= 100.0:
+		Signals.new_unlock.emit("lifetime_eggs_100")
 	
 func decrease_eggs(value: float):
 	stats.total_eggs -= value

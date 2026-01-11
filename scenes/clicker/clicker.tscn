@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0xvhxeo521u2"]
+[gd_scene load_steps=22 format=3 uid="uid://c0xvhxeo521u2"]
 
 [ext_resource type="Script" uid="uid://du4d411gkcehf" path="res://scenes/clicker/clicker.gd" id="1_3yhdj"]
 [ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_7l5xg"]
 [ext_resource type="StyleBox" uid="uid://lvy001rveyr4" path="res://resources/buttons/disabled.tres" id="3_8oacq"]
 [ext_resource type="Script" uid="uid://bmivqo7qvp8v8" path="res://resources/information/upgrades/upgrade.gd" id="4_g5i5g"]
-[ext_resource type="PackedScene" uid="uid://dq54hofjabav5" path="res://scenes/clicker/upgrade_bar/upgrade_bar.tscn" id="4_umt6m"]
+[ext_resource type="PackedScene" uid="uid://dq54hofjabav5" path="res://scenes/upgrade_bar/upgrade_bar.tscn" id="4_umt6m"]
 [ext_resource type="PackedScene" uid="uid://co6fv2vrry7kw" path="res://scenes/boosts/double_eggs.tscn" id="6_ep8w2"]
 
 [sub_resource type="Animation" id="Animation_umt6m"]
@@ -72,25 +72,21 @@ _data = {
 &"unlocked_autoegg": SubResource("Animation_8oacq")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ep8w2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_detail = 5
+
 [sub_resource type="Resource" id="Resource_cgkx7"]
 script = ExtResource("4_g5i5g")
-upgrade_name = "Egg 1"
-description = "Auto Eggs 0.5 -> 1"
-cost = 20.0
+upgrade_name = "Auto Eggs 1"
+description = "0.5 eggs -> 1 egg"
+cost = 80.0
 change = {
 "amount": 0.5,
-&"stat": "eggs_per_auto",
-&"type": "stat_change"
-}
-metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
-
-[sub_resource type="Resource" id="Resource_f313p"]
-script = ExtResource("4_g5i5g")
-upgrade_name = "Eggs 2"
-description = "1 egg -> 2 eggs"
-cost = 50.0
-change = {
-"amount": 1.0,
 &"stat": "eggs_per_auto",
 &"type": "stat_change"
 }
@@ -99,11 +95,23 @@ metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
 [sub_resource type="Resource" id="Resource_c3nw6"]
 script = ExtResource("4_g5i5g")
 upgrade_name = "Rate 1"
-description = "0.5s -> 1s"
-cost = 20.0
+description = "2s -> 1.5s"
+cost = 50.0
 change = {
-"amount": 0.5,
-&"stat": "auto_eggs_per_tick",
+"amount": -0.5,
+&"stat": "auto_eggs_rate",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_f313p"]
+script = ExtResource("4_g5i5g")
+upgrade_name = "Rate 2"
+description = "1.5s -> 1s"
+cost = 100.0
+change = {
+"amount": -0.5,
+&"stat": "auto_eggs_rate",
 &"type": "stat_change"
 }
 metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
@@ -113,6 +121,30 @@ script = ExtResource("4_g5i5g")
 upgrade_name = "Multipler 1"
 description = "0x -> 1.1x"
 cost = 20.0
+change = {
+"amount": 0.1,
+&"stat": "click_multiplier",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_r5df5"]
+script = ExtResource("4_g5i5g")
+upgrade_name = "Multipler 2"
+description = "1.1x -> 1.2x"
+cost = 40.0
+change = {
+"amount": 0.1,
+&"stat": "click_multiplier",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_yyfd7"]
+script = ExtResource("4_g5i5g")
+upgrade_name = "Multipler 2"
+description = "1.2x -> 1.3x"
+cost = 60.0
 change = {
 "amount": 0.1,
 &"stat": "click_multiplier",
@@ -144,24 +176,28 @@ change = {
 }
 metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
 
+[sub_resource type="Resource" id="Resource_fcuaj"]
+script = ExtResource("4_g5i5g")
+upgrade_name = "Eggs 3"
+description = "+1 Eggs per click"
+cost = 40.0
+change = {
+"amount": 1.0,
+&"stat": "eggs_per_click",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
 [sub_resource type="Resource" id="Resource_ep8w2"]
 script = ExtResource("4_g5i5g")
 upgrade_name = "Autoegg"
-description = "Unlock Autoegg. Gives 0.5 eggs every 2s. Upgrdae it for more"
+description = "Unlock Autoegg. Gives 0.5 eggs every 2s."
 cost = 50.0
 change = {
 "gives": "autoegg",
 &"type": "unlock"
 }
 metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ep8w2"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_detail = 5
 
 [node name="clicker" type="Control"]
 layout_mode = 3
@@ -240,7 +276,7 @@ anchor_bottom = 1.0
 offset_left = 12.0
 offset_top = -130.0
 offset_right = 233.0
-offset_bottom = -15.999695
+offset_bottom = -15.999451
 grow_vertical = 0
 color = Color(0.44313726, 0.44313726, 0.44313726, 0.7058824)
 
@@ -278,95 +314,7 @@ offset_top = 296.0
 offset_bottom = 723.0
 grow_horizontal = 0
 grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="upgrades"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -319.0
-offset_top = -184.5
-offset_bottom = 213.5
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="auto_egg_amount" parent="upgrades/VBoxContainer" instance=ExtResource("4_umt6m")]
-layout_mode = 2
-size_flags_vertical = 3
-upgrade_name = "Auto Eggs"
-upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
-0: SubResource("Resource_cgkx7"),
-1: SubResource("Resource_f313p")
-})
-path = {
-&"cost": -1.0,
-"needs": "autoegg",
-&"text": "Needs Autoegg",
-&"type": "dependency",
-&"unlocked": false
-}
-
-[node name="auto_rate_amount" parent="upgrades/VBoxContainer" instance=ExtResource("4_umt6m")]
-layout_mode = 2
-size_flags_vertical = 3
-upgrade_name = "Auto Rate"
-upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
-0: SubResource("Resource_c3nw6")
-})
-path = {
-&"cost": -1.0,
-"needs": "autoegg",
-&"text": "Needs Autoegg",
-&"type": "dependency",
-&"unlocked": false
-}
-
-[node name="click_multiplier" parent="upgrades/VBoxContainer" instance=ExtResource("4_umt6m")]
-layout_mode = 2
-size_flags_vertical = 3
-upgrade_name = "Multipler"
-upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
-0: SubResource("Resource_6a3ph")
-})
-path = {
-&"cost": 70.0,
-&"text": "Unlock (70 eggs)",
-&"type": "purchase",
-&"unlocked": false
-}
-
-[node name="click_upgrade" parent="upgrades/VBoxContainer" instance=ExtResource("4_umt6m")]
-layout_mode = 2
-size_flags_vertical = 3
-upgrade_name = "Click Eggs"
-upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
-0: SubResource("Resource_g5i5g"),
-1: SubResource("Resource_yg2tv")
-})
-max_upgrades = 2
-path = {
-&"cost": 0.0,
-&"text": "None Set",
-&"type": "",
-&"unlocked": true
-}
-
-[node name="autoegg" parent="upgrades/VBoxContainer" instance=ExtResource("4_umt6m")]
-layout_mode = 2
-size_flags_vertical = 3
-upgrade_name = "Autoegg"
-upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
-0: SubResource("Resource_ep8w2")
-})
-max_upgrades = 1
-path = {
-&"cost": 0.0,
-&"text": "None Set",
-&"type": "",
-&"unlocked": true
-}
+color = Color(1, 1, 1, 0)
 
 [node name="open_upgrades" type="Button" parent="upgrades"]
 layout_mode = 1
@@ -391,12 +339,142 @@ theme_override_font_sizes/normal_font_size = 16
 text = "(1)"
 vertical_alignment = 1
 
-[node name="double_eggs" parent="." instance=ExtResource("6_ep8w2")]
+[node name="auto_egg_amount" parent="upgrades" instance=ExtResource("4_umt6m")]
 layout_mode = 0
-offset_left = 954.0
-offset_top = 17.0
-offset_right = 1135.0
-offset_bottom = 94.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 57.0
+offset_right = 319.0
+offset_bottom = 133.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Auto Eggs"
+upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
+0: SubResource("Resource_cgkx7")
+})
+path = {
+&"cost": -1.0,
+"needs": "autoegg",
+&"text": "Needs Autoegg",
+&"type": "dependency",
+&"unlocked": false
+}
+
+[node name="auto_rate_amount" parent="upgrades" instance=ExtResource("4_umt6m")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 163.0
+offset_right = 319.0
+offset_bottom = 239.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Auto Rate"
+upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
+0: SubResource("Resource_c3nw6"),
+1: SubResource("Resource_f313p")
+})
+path = {
+&"cost": -1.0,
+"needs": "autoegg",
+&"text": "Needs Autoegg",
+&"type": "dependency",
+&"unlocked": false
+}
+
+[node name="click_multiplier" parent="upgrades" instance=ExtResource("4_umt6m")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 269.0
+offset_right = 319.0
+offset_bottom = 346.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Multipler"
+upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
+0: SubResource("Resource_6a3ph"),
+1: SubResource("Resource_r5df5"),
+3: SubResource("Resource_yyfd7")
+})
+path = {
+&"cost": 70.0,
+&"text": "Unlock (70 eggs)",
+&"type": "purchase",
+&"unlocked": false
+}
+
+[node name="click_upgrade" parent="upgrades" instance=ExtResource("4_umt6m")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -330.0
+offset_top = 106.0
+offset_right = -11.0
+offset_bottom = 182.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Click Eggs"
+upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
+0: SubResource("Resource_g5i5g"),
+1: SubResource("Resource_yg2tv"),
+2: SubResource("Resource_fcuaj")
+})
+path = {
+&"cost": 0.0,
+&"text": "None Set",
+&"type": "",
+&"unlocked": true
+}
+
+[node name="autoegg" parent="upgrades" instance=ExtResource("4_umt6m")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -330.0
+offset_top = 215.0
+offset_right = -11.0
+offset_bottom = 292.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Autoegg"
+upgrade_path = Dictionary[int, ExtResource("4_g5i5g")]({
+0: SubResource("Resource_ep8w2")
+})
+max_upgrades = 1
+path = {
+&"cost": 0.0,
+&"text": "None Set",
+&"type": "",
+&"unlocked": true
+}
+
+[node name="double_eggs" parent="." instance=ExtResource("6_ep8w2")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -181.0
+offset_top = 20.0
+offset_right = 0.0
+offset_bottom = 131.5
+grow_horizontal = 0
+grow_vertical = 1
 
 [connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]
 [connection signal="pressed" from="enable_auto" to="." method="_on_enable_auto_pressed"]

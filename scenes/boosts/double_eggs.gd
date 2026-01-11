@@ -1,7 +1,7 @@
 extends ColorRect
 
-@export var cooldown_length: float = 30.0
-@export var boost_length: float = 10.0
+var cooldown_length: float = PlayerData.stats.double_egg_cooldown
+var boost_length: float = PlayerData.stats.double_egg_length
 
 @onready var timer: Timer = $Timer
 
@@ -15,13 +15,16 @@ func _ready():
 	
 	_start_cooldown()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if timer.is_stopped(): return
 	
 	$cooldown.text = "%.1fs" % [timer.time_left]
 	
 func _on_activate_pressed():
 	_start_boost()
+	
+func _on_upgrade_pressed():
+	$upgrades_screen.visible = not $upgrades_screen.visible
 	
 func _on_timer_timeout():
 	match end_mode:
@@ -34,7 +37,7 @@ func _start_cooldown():
 	$activate.disabled = true
 	$activate.text = "unavilable"
 	
-	timer.start(cooldown_length)
+	timer.start(PlayerData.stats.double_egg_cooldown)
 	end_mode = Mode.COOLDOWN
 	
 func _end_cooldown():
@@ -43,11 +46,11 @@ func _end_cooldown():
 	end_mode = Mode.BOOST
 	
 func _start_boost():
-	timer.start(boost_length)
+	timer.start(PlayerData.stats.double_egg_length)
 	$activate.disabled = true
 	$activate.text = "unavilable"
-	PlayerData.change_stats("multiplier", 2.0)
+	PlayerData.change_stats("total_multiplier", 1.0)
 	
 func _end_boost():
-	PlayerData.change_stats("multiplier", -1.0)
+	PlayerData.change_stats("total_multiplier", -1.0)
 	_start_cooldown()

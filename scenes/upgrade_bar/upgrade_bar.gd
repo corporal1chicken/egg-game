@@ -30,6 +30,7 @@ func _ready() -> void:
 		if path.type == "dependency":
 			$status.visible = true
 			$path_level.visible = false
+			$status/label.text = path.text
 		else:
 			$purchase/unlock.text = path.text
 			$purchase.visible = true
@@ -58,10 +59,11 @@ func _on_upgrade_pressed() -> void:
 
 # Helper Functions
 func _update_upgrade_text():
-	$upgrade_name.text = upgrade_name
-	$upgrade/hover.text = current_upgrade.description
-	$upgrade.text = "%.1f eggs" % [current_upgrade.cost]
-	$path_level.text = "(%d/%d)" % [upgrade_index, max_upgrades]
+	$upgrade_name.text = current_upgrade.upgrade_name
+	$upgrade_description.text = current_upgrade.description
+	$path_level.text = "(%s/%s)" % [str(upgrade_index), str(max_upgrades)]
+	$upgrade_background/cost.text = str(current_upgrade.cost)
+	pass
 
 func _check_upgrade_path_completed():
 	upgrade_index += 1
