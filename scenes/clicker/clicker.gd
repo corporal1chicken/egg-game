@@ -57,8 +57,14 @@ func _disable_autoegg():
 	ButtonStyles.change_style($enable_auto, "normal", "disabled")
 
 func _on_change_total_eggs():
-	$egg_counter.text = "eggs: %.1f" % [stats.total_eggs]
-
+	var counter: String = str(stats.total_eggs)
+	
+	if PlayerData.settings.hide_decimals:
+		if is_equal_approx(stats.total_eggs, round(stats.total_eggs)):
+			counter = str(int(stats.total_eggs))
+	
+	$egg_counter.text = "eggs: %s" % [counter]
+	
 	var possible_upgrades: int = 0
 	
 	for child in $upgrades/VBoxContainer.get_children():

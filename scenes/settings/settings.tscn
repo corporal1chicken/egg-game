@@ -32,6 +32,16 @@ vertical_alignment = 1
 
 [node name="close_upgrade_tab" parent="." instance=ExtResource("3_tt6xx")]
 layout_mode = 1
+offset_top = -96.0
+offset_bottom = -44.0
 title = "Close Upgrades"
 description = "Close the upgrade tab when you click the egg"
 setting_name = "close_upgrade"
+
+[node name="hide_decimal" parent="." instance=ExtResource("3_tt6xx")]
+layout_mode = 1
+offset_top = 12.0
+offset_bottom = 64.0
+title = "Hide Decimal"
+description = "Hide the .0 on labels (keeps anything else)"
+setting_name = "hide_decimals"

@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://co6fv2vrry7kw"]
+
+[ext_resource type="Script" uid="uid://c7tmmtjp483jx" path="res://scenes/boosts/double_eggs.gd" id="1_r51qf"]
+
+[node name="double_eggs" type="ColorRect"]
+offset_left = -2.0
+offset_right = 179.0
+offset_bottom = 77.0
+color = Color(0.3553136, 0.35531354, 0.35531357, 1)
+script = ExtResource("1_r51qf")
+
+[node name="cooldown" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 16.0
+offset_right = -119.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 18
+text = "2s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "2x Eggs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="activate" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.5
+offset_top = 4.0
+offset_right = 45.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Activate"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="activate" to="." method="_on_activate_pressed"]

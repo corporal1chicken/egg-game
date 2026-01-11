@@ -8,6 +8,9 @@ extends ColorRect
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var green = load("res://resources/colour_rect/green.tres")
+var red = load("res://resources/colour_rect/red.tres")
+
 func _ready():
 	$title.text = title
 	$description.text = description
@@ -21,6 +24,8 @@ func _on_toggle_pressed():
 	if state:
 		animation_player.play("enabled")
 		$ColorRect/toggle.text = "ON"
+		$ColorRect.add_theme_stylebox_override("panel", green)
 	else:
 		animation_player.play("disabled")
 		$ColorRect/toggle.text = "OFF"
+		$ColorRect.add_theme_stylebox_override("panel", red)

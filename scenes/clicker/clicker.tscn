@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0xvhxeo521u2"]
+[gd_scene load_steps=19 format=3 uid="uid://c0xvhxeo521u2"]
 
 [ext_resource type="Script" uid="uid://du4d411gkcehf" path="res://scenes/clicker/clicker.gd" id="1_3yhdj"]
 [ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_7l5xg"]
 [ext_resource type="StyleBox" uid="uid://lvy001rveyr4" path="res://resources/buttons/disabled.tres" id="3_8oacq"]
 [ext_resource type="Script" uid="uid://bmivqo7qvp8v8" path="res://resources/information/upgrades/upgrade.gd" id="4_g5i5g"]
 [ext_resource type="PackedScene" uid="uid://dq54hofjabav5" path="res://scenes/clicker/upgrade_bar/upgrade_bar.tscn" id="4_umt6m"]
+[ext_resource type="PackedScene" uid="uid://co6fv2vrry7kw" path="res://scenes/boosts/double_eggs.tscn" id="6_ep8w2"]
 
 [sub_resource type="Animation" id="Animation_umt6m"]
 length = 0.001
@@ -389,6 +390,13 @@ offset_bottom = 28.0
 theme_override_font_sizes/normal_font_size = 16
 text = "(1)"
 vertical_alignment = 1
+
+[node name="double_eggs" parent="." instance=ExtResource("6_ep8w2")]
+layout_mode = 0
+offset_left = 954.0
+offset_top = 17.0
+offset_right = 1135.0
+offset_bottom = 94.0
 
 [connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]
 [connection signal="pressed" from="enable_auto" to="." method="_on_enable_auto_pressed"]
