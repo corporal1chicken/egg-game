@@ -3,9 +3,13 @@ extends Node
 var stats: Dictionary = {
 	total_eggs = 0.0,
 	lifetime_eggs = 0.0,
+	lifetime_clicks = 0.0,
 	
 	eggs_per_click = 1.0,
+	special_clicks = 10.0,
 	click_multiplier = 1.0,
+	
+	eggs_per_special = 5.0,
 	
 	eggs_per_auto = 0.5,
 	auto_eggs_rate = 2.0,
@@ -27,12 +31,16 @@ var settings: Dictionary = {
 func _ready():
 	Signals.new_upgrade.connect(_on_upgrade)
 	
-func increase_eggs(gain_type: String, value: float):
+func increase_eggs(gain_type: String, value: float, args: Array):
 	var amount_to_add: float = 0.0
 	
 	match gain_type:
 		"click":
 			amount_to_add = (value * stats.click_multiplier)
+			
+			if args[0]:
+				amount_to_add += 5.0
+						
 		"auto":
 			amount_to_add = (value * stats.auto_multiplier)
 	

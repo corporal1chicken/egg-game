@@ -1,7 +1,10 @@
 extends ColorRect
 
+enum Category {Autoegg, Clicker}
+
 @export_category("Upgrade Bar")
 @export var upgrade_name: String = "None Set"
+@export var category: Category
 @export var upgrade_path: Dictionary[int, Upgrade]
 @export var upgrade_index: int = 0
 @export var max_upgrades: int = 0
@@ -56,13 +59,15 @@ func _on_upgrade_pressed() -> void:
 		_check_upgrade_path_completed()
 	else:
 		print("not enough eggs")
+		
+	$upgrade.release_focus()
 
 # Helper Functions
 func _update_upgrade_text():
 	$upgrade_name.text = current_upgrade.upgrade_name
 	$upgrade_description.text = current_upgrade.description
 	$path_level.text = "(%s/%s)" % [str(upgrade_index), str(max_upgrades)]
-	$upgrade_background/cost.text = str(current_upgrade.cost)
+	$cost.text = str(current_upgrade.cost)
 	pass
 
 func _check_upgrade_path_completed():
@@ -80,10 +85,12 @@ func _check_upgrade_path_completed():
 		
 func _unlock_path():
 	path.unlocked = true
-	$status.visible = false
-	$purchase.visible = false
 	$path_level.visible = true
 	
+	$AnimationPlayer.play("unlocked_path")
+	await $AnimationPlayer.animation_finished
+	$status.visible = false
+	$purchase.visible = false
 	if path.cost != -1.0:
 		PlayerData.decrease_eggs(path.cost)
 

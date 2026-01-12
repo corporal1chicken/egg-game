@@ -1,0 +1,480 @@
+[gd_scene load_steps=24 format=3 uid="uid://kysw6653vp86"]
+
+[ext_resource type="PackedScene" uid="uid://dq54hofjabav5" path="res://scenes/upgrades/upgrade_bar/upgrade_bar.tscn" id="1_alr6r"]
+[ext_resource type="Script" uid="uid://f2ukcpkjtdu1" path="res://scenes/upgrades/upgrades.gd" id="1_ba88x"]
+[ext_resource type="Script" uid="uid://bmivqo7qvp8v8" path="res://resources/information/upgrades/upgrade.gd" id="2_ba88x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn3gv"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_detail = 5
+
+[sub_resource type="Resource" id="Resource_cgkx7"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "10 Clicks -> 9 Clicks"
+cost = 80.0
+change = {
+"amount": -1.0,
+&"stat": "special_clicks",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_2sled"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "9 Clicks -> 8 Clicks"
+cost = 100.0
+change = {
+"amount": -1.0,
+&"stat": "special_clicks",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_pbmkv"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "8 Clicks -> 7 Clicks"
+cost = 120.0
+change = {
+"amount": -1.0,
+&"stat": "special_clicks",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_5o6hs"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "7 Clicks -> 6 Clicks"
+cost = 140.0
+change = {
+"amount": -1.0,
+&"stat": "special_clicks",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_waav5"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "6 Clicks -> 5 Clicks"
+cost = 140.0
+change = {
+"amount": -1.0,
+&"stat": "special_clicks",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_nvyx3"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "+5 Eggs -> +7 Eggs"
+cost = 200.0
+change = {
+"amount": 2.0,
+&"stat": "eggs_per_special",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_qel2m"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "+7 Eggs -> +9 Eggs"
+cost = 250.0
+change = {
+"amount": 2.0,
+&"stat": "eggs_per_special",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_vyss3"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Special Click 1"
+description = "+9 Eggs -> +11 Eggs"
+cost = 300.0
+change = {
+"amount": 2.0,
+&"stat": "eggs_per_special",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_c3nw6"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Rate 1"
+description = "2s -> 1.5s"
+cost = 50.0
+change = {
+"amount": -0.5,
+&"stat": "auto_eggs_rate",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_f313p"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Rate 2"
+description = "1.5s -> 1s"
+cost = 100.0
+change = {
+"amount": -0.5,
+&"stat": "auto_eggs_rate",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_6a3ph"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Multipler 1"
+description = "0x -> 1.1x"
+cost = 20.0
+change = {
+"amount": 0.1,
+&"stat": "click_multiplier",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_r5df5"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Multipler 2"
+description = "1.1x -> 1.2x"
+cost = 40.0
+change = {
+"amount": 0.1,
+&"stat": "click_multiplier",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_g5i5g"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Eggs 1"
+description = "+1 Eggs per click"
+cost = 20.0
+change = {
+"amount": 1.0,
+&"stat": "eggs_per_click",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_yg2tv"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Eggs 2"
+description = "+1 Eggs per click"
+cost = 30.0
+change = {
+"amount": 1.0,
+&"stat": "eggs_per_click",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_fcuaj"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Eggs 3"
+description = "+1 Eggs per click"
+cost = 40.0
+change = {
+"amount": 1.0,
+&"stat": "eggs_per_click",
+&"type": "stat_change"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Resource" id="Resource_ep8w2"]
+script = ExtResource("2_ba88x")
+upgrade_name = "Autoegg"
+description = "Unlock Autoegg (0.5 eggs / 2s)"
+cost = 50.0
+change = {
+"gives": "autoegg",
+&"type": "unlock"
+}
+metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
+
+[sub_resource type="Animation" id="Animation_u8xvj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(678, 620)]
+}
+
+[sub_resource type="Animation" id="Animation_fn3gv"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(678, 620), Vector2(678, 217)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_icixs"]
+_data = {
+&"RESET": SubResource("Animation_u8xvj"),
+&"open": SubResource("Animation_fn3gv")
+}
+
+[node name="upgrades" type="ColorRect"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -474.0
+offset_top = 296.0
+offset_right = -155.0
+offset_bottom = 722.9995
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_ba88x")
+
+[node name="open_upgrades" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -157.5
+offset_right = 163.5
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fn3gv")
+text = "upgrades"
+
+[node name="possible_upgrades" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 60.0
+offset_bottom = 28.0
+theme_override_font_sizes/normal_font_size = 16
+text = "(1)"
+vertical_alignment = 1
+
+[node name="holder" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 31.0
+offset_right = 323.0
+offset_bottom = 401.0
+color = Color(1, 1, 1, 0)
+
+[node name="special_clicks" parent="holder" instance=ExtResource("1_alr6r")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 321.0
+offset_bottom = 58.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Specical Clicks"
+category = 1
+upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
+0: SubResource("Resource_cgkx7"),
+1: SubResource("Resource_2sled"),
+2: SubResource("Resource_pbmkv"),
+3: SubResource("Resource_5o6hs"),
+4: SubResource("Resource_waav5"),
+5: SubResource("Resource_nvyx3"),
+6: SubResource("Resource_qel2m"),
+7: SubResource("Resource_vyss3")
+})
+path = {
+&"cost": -1.0,
+"needs": "autoegg",
+&"text": "Needs Autoegg",
+&"type": "dependency",
+&"unlocked": true
+}
+
+[node name="auto_egg_amount2" parent="holder" instance=ExtResource("1_alr6r")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 62.0
+offset_right = 321.0
+offset_bottom = 120.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Auto Eggs"
+upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
+0: SubResource("Resource_cgkx7")
+})
+path = {
+&"cost": -1.0,
+"needs": "autoegg",
+&"text": "Needs Autoegg",
+&"type": "dependency",
+&"unlocked": false
+}
+
+[node name="auto_rate_amount" parent="holder" instance=ExtResource("1_alr6r")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 124.0
+offset_right = 321.0
+offset_bottom = 182.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Auto Rate"
+upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
+0: SubResource("Resource_c3nw6"),
+1: SubResource("Resource_f313p")
+})
+path = {
+&"cost": -1.0,
+"needs": "autoegg",
+&"text": "Needs Autoegg",
+&"type": "dependency",
+&"unlocked": false
+}
+
+[node name="click_multiplier" parent="holder" instance=ExtResource("1_alr6r")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 186.0
+offset_right = 321.0
+offset_bottom = 245.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Multipler"
+category = 1
+upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
+0: SubResource("Resource_6a3ph"),
+1: SubResource("Resource_r5df5")
+})
+path = {
+&"cost": 70.0,
+&"text": "Unlock (70 eggs)",
+&"type": "purchase",
+&"unlocked": false
+}
+
+[node name="click_upgrade" parent="holder" instance=ExtResource("1_alr6r")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 249.0
+offset_right = 321.0
+offset_bottom = 307.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Click Eggs"
+category = 1
+upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
+0: SubResource("Resource_g5i5g"),
+1: SubResource("Resource_yg2tv"),
+2: SubResource("Resource_fcuaj")
+})
+path = {
+&"cost": 0.0,
+&"text": "None Set",
+&"type": "",
+&"unlocked": true
+}
+
+[node name="autoegg" parent="holder" instance=ExtResource("1_alr6r")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 311.0
+offset_right = 321.0
+offset_bottom = 370.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+upgrade_name = "Autoegg"
+upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
+0: SubResource("Resource_ep8w2")
+})
+max_upgrades = 1
+path = {
+&"cost": 0.0,
+&"text": "None Set",
+&"type": "",
+&"unlocked": true
+}
+
+[node name="categories" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -129.5
+offset_right = 142.0
+offset_bottom = 129.5
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="0" type="Button" parent="categories"]
+layout_mode = 2
+text = "autoegg
+"
+
+[node name="1" type="Button" parent="categories"]
+layout_mode = 2
+text = "clicker"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_icixs")
+}
+
+[connection signal="pressed" from="open_upgrades" to="." method="_on_open_upgrades_pressed"]

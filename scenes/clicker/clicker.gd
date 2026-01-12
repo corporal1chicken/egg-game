@@ -8,6 +8,8 @@ var stats = PlayerData.stats
 var auto_active: bool = false
 var upgrades_open: bool = false
 
+var local_clicks: float = 0.0
+
 # Godot Specific Functions
 func _ready():
 	timer.timeout.connect(_on_timer_timeout)
@@ -16,10 +18,13 @@ func _ready():
 
 func _on_timer_timeout():
 	if auto_active:
-		PlayerData.increase_eggs("auto", stats.eggs_per_auto)
+		PlayerData.increase_eggs("auto", stats.eggs_per_auto, [])
 
 # Button Press Functions
 func _on_main_button_pressed():
+	local_clicks += 1
+	PlayerData.change_stats("lifetime_clicks", 1.0)
+	
 	if auto_active:
 		_disable_autoegg()
 		
@@ -27,7 +32,13 @@ func _on_main_button_pressed():
 		upgrades_open = false
 		_play_animation("open_upgrades", "backwards")
 	
-	PlayerData.increase_eggs("click", stats.eggs_per_click)
+	if local_clicks == PlayerData.stats.special_clicks:
+		local_clicks = 0
+		PlayerData.increase_eggs("click", stats.eggs_per_click, [true])
+	else:
+		PlayerData.increase_eggs("click", stats.eggs_per_click, [false])
+
+
 
 func _on_enable_auto_pressed():
 	if auto_active:
@@ -64,7 +75,7 @@ func _on_change_total_eggs():
 	$egg_counter.text = "eggs: %s" % [counter]
 	
 	var possible_upgrades: int = 0
-	
+	"""
 	for child in $upgrades.get_children():
 		if child.name == "open_upgrades" or child.name == "possible_upgrades":
 			continue
@@ -77,7 +88,7 @@ func _on_change_total_eggs():
 		$upgrades/possible_upgrades.text = "(%d)" % [possible_upgrades]
 	else:
 		$upgrades/possible_upgrades.visible = false
-
+	"""
 func _play_animation(animation_name: String, direction: String):
 	if animation_player.is_playing():
 		await animation_player.animation_finished
