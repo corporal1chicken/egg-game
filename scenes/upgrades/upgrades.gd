@@ -3,40 +3,49 @@ extends ColorRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var open: bool = false
-var current_category: int = 1
+var current_category: Button
 var spacing: int = 5
 
 # Godot Specific Functions
 func _ready():
 	for button in $categories.get_children():
-		button.pressed.connect(_on_category_button.bind(int(button.name)))
-
+		button.pressed.connect(_on_category_button.bind(button))
+		
+	current_category = 	$categories/clicker
+	
 	_change_holder()
 
 # Button Functions
 func _on_open_upgrades_pressed() -> void:
-	if animation_player.is_playing(): return
-	
 	if open:
+		_play_tween(self.position + Vector2(0, 190))
 		open = false
-		$AnimationPlayer.play_backwards("open")
 	else:
+		_play_tween(self.position + Vector2(0, -190))
 		open = true
-		$AnimationPlayer.play("open")
 		
 	$open_upgrades.release_focus()
 
-func _on_category_button(category: int):
-	if current_category == category: return
+func _play_tween(target_position: Vector2):
+	var duration: float = 0.3
+	var tween: Tween = create_tween()
 	
-	current_category = category
+	tween.tween_property(self, "position", target_position, duration)
+
+func _on_category_button(button: Button):
+	if current_category == button: return
 	
+	current_category.text = current_category.name
+	current_category = button
+	button.text = "[>] %s" % button.name
+	
+	button.release_focus()
 	_change_holder()
 			
 # Helper Functions
 func _change_holder():
 	for upgrade in $holder.get_children():
-		if upgrade.category == current_category:
+		if upgrade.category == current_category.name:
 			upgrade.visible = true
 		else:
 			upgrade.visible = false

@@ -1,10 +1,8 @@
 extends ColorRect
 
-enum Category {Autoegg, Clicker}
-
 @export_category("Upgrade Bar")
 @export var upgrade_name: String = "None Set"
-@export var category: Category
+@export var category: String = ""
 @export var upgrade_path: Dictionary[int, Upgrade]
 @export var upgrade_index: int = 0
 @export var max_upgrades: int = 0

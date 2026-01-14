@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://co6fv2vrry7kw"]
 
-[ext_resource type="Script" uid="uid://c7tmmtjp483jx" path="res://scenes/boosts/double_eggs.gd" id="1_r51qf"]
-[ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_v8dqi"]
-[ext_resource type="PackedScene" uid="uid://dq54hofjabav5" path="res://scenes/upgrades/upgrade_bar/upgrade_bar.tscn" id="3_0y6dh"]
-[ext_resource type="Script" uid="uid://bmivqo7qvp8v8" path="res://resources/information/upgrades/upgrade.gd" id="4_p87p3"]
+[ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_rrik2"]
+[ext_resource type="Script" uid="uid://c7tmmtjp483jx" path="res://scenes/boosts/boost_bar.gd" id="2_5c4e3"]
+[ext_resource type="PackedScene" uid="uid://dq54hofjabav5" path="res://scenes/upgrades/upgrade_bar/upgrade_bar.tscn" id="3_12sl8"]
+[ext_resource type="Script" uid="uid://bmivqo7qvp8v8" path="res://resources/information/upgrades/upgrade.gd" id="4_8a24t"]
 
 [sub_resource type="Resource" id="Resource_0y6dh"]
-script = ExtResource("4_p87p3")
+script = ExtResource("4_8a24t")
 upgrade_name = "Cooldown 1"
 description = "30s -> 20s"
 cost = 150.0
@@ -18,7 +18,7 @@ change = {
 metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
 
 [sub_resource type="Resource" id="Resource_p87p3"]
-script = ExtResource("4_p87p3")
+script = ExtResource("4_8a24t")
 upgrade_name = "Boost 1"
 description = "10s -> 15s"
 cost = 100.0
@@ -29,7 +29,7 @@ change = {
 }
 metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
 
-[node name="double_eggs" type="ColorRect"]
+[node name="boost_bar" type="ColorRect"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -41,44 +41,36 @@ offset_right = 90.5
 offset_bottom = 38.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_v8dqi")
+theme = ExtResource("1_rrik2")
 color = Color(0.3553136, 0.35531354, 0.35531357, 1)
-script = ExtResource("1_r51qf")
-
-[node name="cooldown" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -72.0
-offset_top = 82.0
-offset_right = 72.0
-offset_bottom = 124.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 24
-text = "1.0s
-"
-horizontal_alignment = 1
-vertical_alignment = 1
+script = ExtResource("2_5c4e3")
 
 [node name="title" type="RichTextLabel" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -87.0
-offset_top = -55.75
-offset_right = 87.0
-offset_bottom = -27.75
-grow_horizontal = 2
+offset_left = -152.5
+offset_top = -28.75
+offset_right = -24.5
+offset_bottom = -0.75
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 20
 text = "2x Eggs"
+horizontal_alignment = 1
+
+[node name="cooldown" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -1.75
+offset_right = -26.5
+offset_bottom = 26.25
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 14
+text = "30.0"
 horizontal_alignment = 1
 
 [node name="description" type="RichTextLabel" parent="."]
@@ -88,35 +80,50 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -87.0
-offset_top = -28.75
-offset_right = 87.0
-offset_bottom = 5.25
+offset_left = -80.0
+offset_top = -46.75
+offset_right = 80.0
+offset_bottom = 13.25
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/normal_font_size = 14
 text = "Double Eggs from all sources"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="activate" type="Button" parent="."]
-layout_mode = 0
-offset_left = 3.5
-offset_top = 75.0
-offset_right = 88.5
-offset_bottom = 105.0
-text = "Activate"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -35.5
+offset_bottom = -5.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 15
+text = "activate"
 
 [node name="upgrade" type="Button" parent="."]
-layout_mode = 0
-offset_left = 92.5
-offset_top = 75.0
-offset_right = 177.5
-offset_bottom = 105.0
-text = "upgrade
-"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -35.5
+offset_right = 87.0
+offset_bottom = -5.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 15
+text = "upgrade"
 
 [node name="open" type="Button" parent="."]
 layout_mode = 1
@@ -143,13 +150,13 @@ offset_right = -11.0
 offset_bottom = 129.5
 color = Color(1, 1, 1, 0)
 
-[node name="cooldown" parent="upgrades_screen" instance=ExtResource("3_0y6dh")]
+[node name="cooldown" parent="upgrades_screen" instance=ExtResource("3_12sl8")]
 layout_mode = 1
 offset_left = -28.0
 offset_top = 19.0
 offset_right = -28.0
 offset_bottom = -75.0
-upgrade_path = Dictionary[int, ExtResource("4_p87p3")]({
+upgrade_path = Dictionary[int, ExtResource("4_8a24t")]({
 0: SubResource("Resource_0y6dh")
 })
 path = {
@@ -159,14 +166,14 @@ path = {
 &"unlocked": true
 }
 
-[node name="boost" parent="upgrades_screen" instance=ExtResource("3_0y6dh")]
+[node name="boost" parent="upgrades_screen" instance=ExtResource("3_12sl8")]
 layout_mode = 1
 offset_left = -28.0
 offset_top = 100.0
 offset_right = -28.0
 offset_bottom = 6.0
 upgrade_name = "Boost"
-upgrade_path = Dictionary[int, ExtResource("4_p87p3")]({
+upgrade_path = Dictionary[int, ExtResource("4_8a24t")]({
 0: SubResource("Resource_p87p3")
 })
 path = {
@@ -179,4 +186,4 @@ path = {
 
 [connection signal="pressed" from="activate" to="." method="_on_activate_pressed"]
 [connection signal="pressed" from="upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="open" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="open" to="." method="_on_open_pressed"]

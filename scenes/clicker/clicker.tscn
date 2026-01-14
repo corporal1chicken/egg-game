@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0xvhxeo521u2"]
+[gd_scene load_steps=9 format=3 uid="uid://c0xvhxeo521u2"]
 
 [ext_resource type="Script" uid="uid://du4d411gkcehf" path="res://scenes/clicker/clicker.gd" id="1_3yhdj"]
 [ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_7l5xg"]
 [ext_resource type="StyleBox" uid="uid://lvy001rveyr4" path="res://resources/buttons/disabled.tres" id="3_8oacq"]
 [ext_resource type="PackedScene" uid="uid://kysw6653vp86" path="res://scenes/upgrades/upgrades.tscn" id="5_ep8w2"]
-[ext_resource type="PackedScene" uid="uid://co6fv2vrry7kw" path="res://scenes/boosts/double_eggs.tscn" id="6_ep8w2"]
+[ext_resource type="PackedScene" uid="uid://co6fv2vrry7kw" path="res://scenes/boosts/boost_bar.tscn" id="6_ep8w2"]
 
 [sub_resource type="Animation" id="Animation_umt6m"]
 length = 0.001
@@ -20,10 +20,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(12, 518)]
 }
-
-[sub_resource type="Animation" id="Animation_g5i5g"]
-resource_name = "open_upgrades"
-length = 0.5
 
 [sub_resource type="Animation" id="Animation_8oacq"]
 resource_name = "unlocked_autoegg"
@@ -43,7 +39,6 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g5i5g"]
 _data = {
 &"RESET": SubResource("Animation_umt6m"),
-&"open_upgrades": SubResource("Animation_g5i5g"),
 &"unlocked_autoegg": SubResource("Animation_8oacq")
 }
 
@@ -158,12 +153,44 @@ anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -181.0
+offset_left = -2.0
 offset_top = 20.0
-offset_right = 0.0
+offset_right = 179.0
 offset_bottom = 131.5
 grow_horizontal = 0
 grow_vertical = 1
+title = "2x Eggs"
+description = "Double Eggs from all sources"
+data_name = "double_egg"
+change_data = {
+&"change_type": "multiply",
+&"stat": "total_multiplier",
+&"type": "temporary",
+&"value": "2.0"
+}
+
+[node name="special_clicks" parent="." instance=ExtResource("6_ep8w2")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -2.0
+offset_top = 142.0
+offset_right = 179.0
+offset_bottom = 253.5
+grow_horizontal = 0
+grow_vertical = 1
+title = "Special"
+description = "Every click is now a special click"
+data_name = "special_clicks"
+change_data = {
+&"change_type": "replace",
+&"stat": "special_clicks",
+&"type": "temporary",
+&"value": "1.0"
+}
 
 [node name="upgrades" parent="." instance=ExtResource("5_ep8w2")]
 layout_mode = 1

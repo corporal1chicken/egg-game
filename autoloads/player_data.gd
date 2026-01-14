@@ -17,9 +17,6 @@ var stats: Dictionary = {
 	
 	total_multiplier = 1.0,
 	
-	double_egg_cooldown = 30.0,
-	double_egg_length = 10.0,
-	
 	autoegg_unlocked = false
 }
 
@@ -27,6 +24,19 @@ var settings: Dictionary = {
 	close_upgrade = false,
 	hide_decimals = false
 }
+
+var boosts = {
+	double_egg = {
+		cooldown = 25.0,
+		length = 7.0
+	},
+	special_clicks = {
+		cooldown = 45.0,
+		length = 5.0
+	}
+}
+
+var original_values: Dictionary = {}
 
 func _ready():
 	Signals.new_upgrade.connect(_on_upgrade)
@@ -72,3 +82,30 @@ func change_setting(setting: String, new_value):
 
 func change_stats(stat_name, amount):
 	stats[stat_name] += amount
+
+func temporary_stat_change(change_data: Dictionary):
+	original_values[change_data.stat] = stats[change_data.stat]
+	
+	if change_data.change_type == "replace":
+		stats[change_data.stat] = float(change_data.value)
+	elif change_data.change_type == "addition":
+		stats[change_data.stat] += float(change_data.value)
+	elif change_data.change_type == "multiply":
+		stats[change_data.stat] *= float(change_data.value)
+	
+func revert_stat_change(change_data: Dictionary):
+	if not original_values.has(change_data.stat):
+		print("no stat found: %s" % [change_data.stat])
+		return
+
+	stats[change_data.stat] = original_values[change_data.stat]
+	
+func permenant_stat_change(change_data: Dictionary):
+	stats[change_data.stat] += change_data.value
+	
+func change_stat(change_data: Dictionary):
+	match change_data.type:
+		"permenant":
+			permenant_stat_change(change_data)
+		"temporary":
+			temporary_stat_change(change_data)

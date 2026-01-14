@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://kysw6653vp86"]
+[gd_scene load_steps=21 format=3 uid="uid://kysw6653vp86"]
 
 [ext_resource type="PackedScene" uid="uid://dq54hofjabav5" path="res://scenes/upgrades/upgrade_bar/upgrade_bar.tscn" id="1_alr6r"]
 [ext_resource type="Script" uid="uid://f2ukcpkjtdu1" path="res://scenes/upgrades/upgrades.gd" id="1_ba88x"]
@@ -203,53 +203,16 @@ change = {
 }
 metadata/_custom_type_script = "uid://bmivqo7qvp8v8"
 
-[sub_resource type="Animation" id="Animation_u8xvj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(678, 620)]
-}
-
-[sub_resource type="Animation" id="Animation_fn3gv"]
-resource_name = "open"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(678, 620), Vector2(678, 217)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_icixs"]
-_data = {
-&"RESET": SubResource("Animation_u8xvj"),
-&"open": SubResource("Animation_fn3gv")
-}
-
 [node name="upgrades" type="ColorRect"]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -474.0
-offset_top = 296.0
-offset_right = -155.0
-offset_bottom = 722.9995
+offset_left = -472.0
+offset_top = 106.0
+offset_right = -153.0
+offset_bottom = 532.9995
 grow_horizontal = 0
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -287,7 +250,6 @@ offset_bottom = 401.0
 color = Color(1, 1, 1, 0)
 
 [node name="special_clicks" parent="holder" instance=ExtResource("1_alr6r")]
-visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -300,7 +262,7 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_vertical = 3
 upgrade_name = "Specical Clicks"
-category = 1
+category = "clicker"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_cgkx7"),
 1: SubResource("Resource_2sled"),
@@ -320,7 +282,6 @@ path = {
 }
 
 [node name="auto_egg_amount2" parent="holder" instance=ExtResource("1_alr6r")]
-visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -333,6 +294,7 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_vertical = 3
 upgrade_name = "Auto Eggs"
+category = "autoegg"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_cgkx7")
 })
@@ -345,7 +307,6 @@ path = {
 }
 
 [node name="auto_rate_amount" parent="holder" instance=ExtResource("1_alr6r")]
-visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -358,6 +319,7 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_vertical = 3
 upgrade_name = "Auto Rate"
+category = "autoegg"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_c3nw6"),
 1: SubResource("Resource_f313p")
@@ -384,7 +346,7 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_vertical = 3
 upgrade_name = "Multipler"
-category = 1
+category = "clicker"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_6a3ph"),
 1: SubResource("Resource_r5df5")
@@ -410,7 +372,7 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_vertical = 3
 upgrade_name = "Click Eggs"
-category = 1
+category = "clicker"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_g5i5g"),
 1: SubResource("Resource_yg2tv"),
@@ -437,6 +399,7 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_vertical = 3
 upgrade_name = "Autoegg"
+category = "autoegg"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_ep8w2")
 })
@@ -461,20 +424,14 @@ offset_right = 142.0
 offset_bottom = 129.5
 grow_horizontal = 0
 grow_vertical = 2
-alignment = 1
 
-[node name="0" type="Button" parent="categories"]
+[node name="autoegg" type="Button" parent="categories"]
 layout_mode = 2
 text = "autoegg
 "
 
-[node name="1" type="Button" parent="categories"]
+[node name="clicker" type="Button" parent="categories"]
 layout_mode = 2
-text = "clicker"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_icixs")
-}
+text = "[>] clicker"
 
 [connection signal="pressed" from="open_upgrades" to="." method="_on_open_upgrades_pressed"]
