@@ -82,11 +82,17 @@ func _end_cooldown():
 	end_mode = Mode.BOOST
 	
 func _start_boost():
+	if PlayerData.state.boost_active:
+		print("boost already active")
+		return
+	
 	timer.start(data.length)
 	$activate.disabled = true
 	$activate.text = "in use"
 	PlayerData.change_stat(change_data)
+	PlayerData.state.boost_active = true
 	
 func _end_boost():
 	PlayerData.revert_stat_change(change_data)
+	PlayerData.state.boost_active = false
 	_start_cooldown()

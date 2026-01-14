@@ -1,7 +1,5 @@
 extends ColorRect
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-
 var open: bool = false
 var current_category: Button
 var spacing: int = 5
@@ -60,3 +58,8 @@ func _rearrange_children():
 		
 		upgrade.position.y = current_y
 		current_y += upgrade.size.y + spacing
+
+func close_upgrade_setting_enabled():
+	if open:
+		_on_open_upgrades_pressed()
+		

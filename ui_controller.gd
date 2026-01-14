@@ -1,23 +1,24 @@
 extends Control
 
+var current_screen: String = "play_screen"
+
 func _ready() -> void:
 	for child in $CanvasLayer/play_screen/VBoxContainer.get_children():
 		child.pressed.connect(_on_option_pressed.bind(child.name))
 	
+	Signals.change_screen.connect(_on_change_screen)
+	
 func _on_option_pressed(option: String):
 	match option:
 		"play":
-			$CanvasLayer/play_screen.visible = false
-			$CanvasLayer/clicker.visible = true
-			$CanvasLayer/back.visible = false
+			_on_change_screen("play_screen", "clicker")
 		"settings":
-			$CanvasLayer/play_screen.visible = false
-			$CanvasLayer/settings.visible = true
-			$CanvasLayer/back.visible = true
+			_on_change_screen("play_screen", "settings")
 		"quit":
 			get_tree().quit()
 
-func _on_back_pressed():
-	$CanvasLayer/settings.visible = false
-	$CanvasLayer/play_screen.visible = true
-	$CanvasLayer/back.visible = false
+func _on_change_screen(old_screen, new_screen):
+	$CanvasLayer.get_node(old_screen).visible = false
+	$CanvasLayer.get_node(new_screen).visible = true
+	
+	current_screen = new_screen

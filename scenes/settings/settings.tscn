@@ -45,3 +45,18 @@ offset_bottom = 64.0
 title = "Hide Decimal"
 description = "Hide the .0 on labels (keeps anything else)"
 setting_name = "hide_decimals"
+
+[node name="back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -71.0
+offset_right = 221.0
+offset_bottom = -18.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "back"
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

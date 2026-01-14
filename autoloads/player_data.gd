@@ -27,13 +27,21 @@ var settings: Dictionary = {
 
 var boosts = {
 	double_egg = {
-		cooldown = 25.0,
+		cooldown = 5.0,
 		length = 7.0
 	},
 	special_clicks = {
-		cooldown = 45.0,
+		cooldown = 5.0,
 		length = 5.0
 	}
+}
+
+var events: Dictionary = {
+	"lifetime_eggs" = [10.0, 20.0, 50.0]
+}
+
+var state: Dictionary = {
+	boost_active = false
 }
 
 var original_values: Dictionary = {}
@@ -60,7 +68,17 @@ func increase_eggs(gain_type: String, value: float, args: Array):
 	
 	if stats.lifetime_eggs >= 100.0:
 		Signals.new_unlock.emit("lifetime_eggs_100")
-	
+		
+	_check_event()
+
+func _check_event():
+	for key in events.keys():
+		for value in events[key]:
+			if value <= stats[key]:
+				Signals.new_unlock.emit(key + "_" + str(value))
+				events[key].erase(value)
+				break
+
 func decrease_eggs(value: float):
 	stats.total_eggs -= value
 	Signals.change_total_eggs.emit()

@@ -18,11 +18,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(12, 518)]
+"values": [Vector2(12, 558)]
 }
 
-[sub_resource type="Animation" id="Animation_8oacq"]
+[sub_resource type="Animation" id="Animation_g5i5g"]
 resource_name = "unlocked_autoegg"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -30,16 +31,16 @@ tracks/0/path = NodePath("locked_panel:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 0.3, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(12, 518), Vector2(12, 496), Vector2(12, 672)]
+"values": [Vector2(12, 558), Vector2(12, 535), Vector2(12, 669)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g5i5g"]
 _data = {
 &"RESET": SubResource("Animation_umt6m"),
-&"unlocked_autoegg": SubResource("Animation_8oacq")
+&"unlocked_autoegg": SubResource("Animation_g5i5g")
 }
 
 [node name="clicker" type="Control"]
@@ -99,28 +100,15 @@ theme_override_font_sizes/normal_font_size = 32
 text = "eggs: 0"
 horizontal_alignment = 1
 
-[node name="auto_rate" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 34.0
-offset_top = -120.0
-offset_right = 214.0
-offset_bottom = -88.0
-grow_vertical = 0
-theme_override_font_sizes/normal_font_size = 20
-text = "5.0 eggs / 3.0s"
-
 [node name="locked_panel" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = -130.0
+offset_top = -90.0
 offset_right = 233.0
-offset_bottom = -15.999451
+offset_bottom = -9.999451
 grow_vertical = 0
 color = Color(0.44313726, 0.44313726, 0.44313726, 0.7058824)
 
@@ -140,11 +128,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_g5i5g")
-}
 
 [node name="double_eggs" parent="." instance=ExtResource("6_ep8w2")]
 layout_mode = 1
@@ -198,10 +181,25 @@ anchors_preset = 3
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = -484.0
-offset_top = -37.0
+offset_top = -28.0
 offset_right = -165.0
-offset_bottom = 389.9995
+offset_bottom = 398.9995
 grow_vertical = 0
+
+[node name="menu" type="Button" parent="."]
+layout_mode = 1
+offset_left = 26.0
+offset_top = 26.0
+offset_right = 225.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 32
+text = "menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g5i5g")
+}
 
 [connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]
 [connection signal="pressed" from="enable_auto" to="." method="_on_enable_auto_pressed"]
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]

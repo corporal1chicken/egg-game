@@ -28,9 +28,8 @@ func _on_main_button_pressed():
 	if auto_active:
 		_disable_autoegg()
 		
-	if upgrades_open and PlayerData.settings.close_upgrade:
-		upgrades_open = false
-		_play_animation("open_upgrades", "backwards")
+	if PlayerData.settings.close_upgrade:
+		$upgrades.close_upgrade_setting_enabled()
 	
 	if local_clicks == PlayerData.stats.special_clicks:
 		local_clicks = 0
@@ -38,21 +37,14 @@ func _on_main_button_pressed():
 	else:
 		PlayerData.increase_eggs("click", stats.eggs_per_click, [false])
 
-
-
 func _on_enable_auto_pressed():
 	if auto_active:
 		_disable_autoegg()
 	else:
 		_enable_autoegg()
 		
-func _on_open_upgrades_pressed():
-	if upgrades_open:
-		upgrades_open = false
-		_play_animation("open_upgrades", "backwards")
-	else:
-		upgrades_open = true
-		_play_animation("open_upgrades", "forwards")
+func _on_menu_pressed() -> void:
+	Signals.change_screen.emit("clicker", "play_screen")
 
 # Helper Functions
 func _enable_autoegg():

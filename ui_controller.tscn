@@ -58,18 +58,3 @@ text = "quit"
 
 [node name="settings" parent="CanvasLayer" instance=ExtResource("3_rlpp8")]
 visible = false
-
-[node name="back" type="Button" parent="CanvasLayer"]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 22.0
-offset_top = -71.0
-offset_right = 221.0
-offset_bottom = -18.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "back"
-
-[connection signal="pressed" from="CanvasLayer/back" to="." method="_on_back_pressed"]
