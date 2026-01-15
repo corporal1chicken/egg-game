@@ -46,8 +46,18 @@ var state: Dictionary = {
 
 var original_values: Dictionary = {}
 
+var passive_egg_timer: Timer
+
 func _ready():
 	Signals.new_upgrade.connect(_on_upgrade)
+	
+	passive_egg_timer = Timer.new()
+	passive_egg_timer.wait_time = 1.0
+	passive_egg_timer.one_shot = false
+	passive_egg_timer.autostart = false
+	add_child(passive_egg_timer)
+	
+	passive_egg_timer.timeout.connect(_on_passive_eggs)
 	
 func increase_eggs(gain_type: String, value: float, args: Array):
 	var amount_to_add: float = 0.0
@@ -61,13 +71,12 @@ func increase_eggs(gain_type: String, value: float, args: Array):
 						
 		"auto":
 			amount_to_add = (value * stats.auto_multiplier)
+		"passive":
+			amount_to_add += value
 	
 	stats.total_eggs += (amount_to_add * stats.total_multiplier)
 	stats.lifetime_eggs += amount_to_add * stats.total_multiplier
 	Signals.change_total_eggs.emit()
-	
-	if stats.lifetime_eggs >= 100.0:
-		Signals.new_unlock.emit("lifetime_eggs_100")
 		
 	_check_event()
 
@@ -127,3 +136,21 @@ func change_stat(change_data: Dictionary):
 			permenant_stat_change(change_data)
 		"temporary":
 			temporary_stat_change(change_data)
+
+func _on_passive_eggs():
+	increase_eggs("passive", 0.1, [])
+	
+func give_progression(type: String, data: Dictionary):
+	match type:
+		"upgrade":
+			pass
+		"boost":
+			pass
+		"achievement":
+			if data.key == "start_timer":
+				passive_egg_timer.start(2)
+		"milestone":
+			pass
+		
+	
+	pass

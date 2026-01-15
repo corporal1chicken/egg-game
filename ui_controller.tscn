@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://kbv7umdpp48d"]
+[gd_scene load_steps=5 format=3 uid="uid://kbv7umdpp48d"]
 
 [ext_resource type="Script" uid="uid://dpo7c8l0v4811" path="res://ui_controller.gd" id="1_1ajqp"]
 [ext_resource type="PackedScene" uid="uid://c0xvhxeo521u2" path="res://scenes/clicker/clicker.tscn" id="1_3ga5c"]
 [ext_resource type="PackedScene" uid="uid://dbi28ckatdmln" path="res://scenes/settings/settings.tscn" id="3_rlpp8"]
+[ext_resource type="PackedScene" uid="uid://di0aajytmwp0j" path="res://scenes/achievements/achievements.tscn" id="4_dy358"]
 
 [node name="ui_controller" type="Control"]
 layout_mode = 3
@@ -46,6 +47,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "play"
 
+[node name="achievements" type="Button" parent="CanvasLayer/play_screen/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "achievements"
+
 [node name="settings" type="Button" parent="CanvasLayer/play_screen/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -57,4 +63,7 @@ theme_override_font_sizes/font_size = 32
 text = "quit"
 
 [node name="settings" parent="CanvasLayer" instance=ExtResource("3_rlpp8")]
+visible = false
+
+[node name="achievements" parent="CanvasLayer" instance=ExtResource("4_dy358")]
 visible = false

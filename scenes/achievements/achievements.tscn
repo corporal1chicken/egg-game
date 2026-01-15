@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://di0aajytmwp0j"]
+
+[ext_resource type="Script" uid="uid://c2clf67jc63i" path="res://scenes/achievements/achievements.gd" id="1_k6cym"]
+[ext_resource type="PackedScene" uid="uid://o3imyteg0jvf" path="res://scenes/achievements/achievements_bar/achievements_bar.tscn" id="2_ldh3k"]
+
+[node name="achievements" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k6cym")
+
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -547.0
+offset_top = 30.0
+offset_right = 547.0
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 60
+text = "Achievements"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -71.0
+offset_right = 221.0
+offset_bottom = -18.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "back"
+
+[node name="achievements_bar" parent="." instance=ExtResource("2_ldh3k")]
+layout_mode = 1
+offset_top = -40.1875
+offset_bottom = 40.1875
+title = "Eggs"
+description = "Collect eggs"
+reward = {
+&"key": "start_timer",
+&"text": "Reward: Passive Eggs (0.1/2s)"
+}
+tiers = Array[float]([10.0, 30.0, 50.0])
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

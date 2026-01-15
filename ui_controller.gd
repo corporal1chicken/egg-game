@@ -14,6 +14,8 @@ func _on_option_pressed(option: String):
 			_on_change_screen("play_screen", "clicker")
 		"settings":
 			_on_change_screen("play_screen", "settings")
+		"achievements":
+			_on_change_screen("play_screen", "achievements")
 		"quit":
 			get_tree().quit()
 
