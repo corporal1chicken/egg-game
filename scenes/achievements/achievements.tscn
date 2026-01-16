@@ -48,9 +48,10 @@ offset_bottom = 40.1875
 title = "Eggs"
 description = "Collect eggs"
 reward = {
-&"key": "start_timer",
+&"key": "passive_egg_unlock",
 &"text": "Reward: Passive Eggs (0.1/2s)"
 }
+stat_name = "lifetime_eggs"
 tiers = Array[float]([10.0, 30.0, 50.0])
 
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

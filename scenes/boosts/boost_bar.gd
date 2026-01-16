@@ -87,12 +87,12 @@ func _start_boost():
 		return
 	
 	timer.start(data.length)
+	
 	$activate.disabled = true
 	$activate.text = "in use"
-	PlayerData.change_stat(change_data)
-	PlayerData.state.boost_active = true
+
+	PlayerData.process_boost("start", change_data)
 	
 func _end_boost():
-	PlayerData.revert_stat_change(change_data)
-	PlayerData.state.boost_active = false
+	PlayerData.process_boost("end", change_data)
 	_start_cooldown()

@@ -52,8 +52,7 @@ func _on_unlock_pressed() -> void:
 
 func _on_upgrade_pressed() -> void:
 	if current_upgrade.cost <= PlayerData.stats.total_eggs:
-		Signals.new_upgrade.emit(current_upgrade.change, current_upgrade.cost)
-		
+		PlayerData.process_upgrade(current_upgrade.change, current_upgrade.cost)
 		_check_upgrade_path_completed()
 	else:
 		print("not enough eggs")
@@ -77,6 +76,7 @@ func _check_upgrade_path_completed():
 		$status.color.a = 0.5
 		$path_level.visible = false
 		$status/label.text = "Path Completed!"
+		path_completed = true
 	else:
 		current_upgrade = upgrade_path.get(upgrade_index)
 		_update_upgrade_text()

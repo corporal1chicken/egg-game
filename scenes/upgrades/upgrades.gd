@@ -6,6 +6,8 @@ var spacing: int = 5
 
 # Godot Specific Functions
 func _ready():
+	Signals.change_total_eggs.connect(_on_change_total_eggs)
+	
 	for button in $categories.get_children():
 		button.pressed.connect(_on_category_button.bind(button))
 		
@@ -55,6 +57,7 @@ func _rearrange_children():
 	
 	for upgrade in $holder.get_children():
 		if not upgrade.visible: continue
+		if upgrade.path_completed: continue
 		
 		upgrade.position.y = current_y
 		current_y += upgrade.size.y + spacing
@@ -63,3 +66,17 @@ func close_upgrade_setting_enabled():
 	if open:
 		_on_open_upgrades_pressed()
 		
+func _on_change_total_eggs():
+	var possible_upgrades: int = 0
+
+	for child in $holder.get_children():
+		if not child.path.unlocked: continue
+		
+		if child.can_upgrade:
+			possible_upgrades += 1
+	
+	if possible_upgrades != 0:
+		$possible_upgrades.visible = true
+		$possible_upgrades.text = "(%d)" % [possible_upgrades]
+	else:
+		$possible_upgrades.visible = false

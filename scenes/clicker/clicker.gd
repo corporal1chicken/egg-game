@@ -23,7 +23,7 @@ func _on_timer_timeout():
 # Button Press Functions
 func _on_main_button_pressed():
 	local_clicks += 1
-	PlayerData.change_stats("lifetime_clicks", 1.0)
+	PlayerData.increase_clicks()
 	
 	if auto_active:
 		_disable_autoegg()
@@ -33,9 +33,9 @@ func _on_main_button_pressed():
 	
 	if local_clicks == PlayerData.stats.special_clicks:
 		local_clicks = 0
-		PlayerData.increase_eggs("click", stats.eggs_per_click, [true])
+		PlayerData.increase_eggs("click", stats.eggs_per_click, [PlayerData.stats.eggs_per_special])
 	else:
-		PlayerData.increase_eggs("click", stats.eggs_per_click, [false])
+		PlayerData.increase_eggs("click", stats.eggs_per_click, [])
 
 func _on_enable_auto_pressed():
 	if auto_active:
@@ -66,21 +66,6 @@ func _on_change_total_eggs():
 	
 	$egg_counter.text = "eggs: %.1f" % [stats.total_eggs]
 	
-	var possible_upgrades: int = 0
-	"""
-	for child in $upgrades.get_children():
-		if child.name == "open_upgrades" or child.name == "possible_upgrades":
-			continue
-		
-		if child.can_upgrade:
-			possible_upgrades += 1
-	
-	if possible_upgrades != 0:
-		$upgrades/possible_upgrades.visible = true
-		$upgrades/possible_upgrades.text = "(%d)" % [possible_upgrades]
-	else:
-		$upgrades/possible_upgrades.visible = false
-	"""
 func _play_animation(animation_name: String, direction: String):
 	if animation_player.is_playing():
 		await animation_player.animation_finished

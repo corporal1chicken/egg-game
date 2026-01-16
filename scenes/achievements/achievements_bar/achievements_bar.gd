@@ -39,7 +39,6 @@ func _update_progress_text():
 
 func _on_stat_change():	
 	if not tracking: 
-		print("cancelling tracking")
 		return
 	
 	_update_progress_text()
@@ -51,7 +50,6 @@ func _on_stat_change():
 	
 func _check_requirements(unlock):
 	# Check new unlocks, e.g. autoegg
-	print(unlock)
 	pass
 	
 func _tier_completed():
@@ -63,8 +61,7 @@ func _tier_completed():
 		tracking = false
 	
 func _all_tiers_complete():
-	# Give reward, stop tracking
-	PlayerData.give_progression("achievement", reward)
+	PlayerData.process_achievement(reward)
 	Signals.change_total_eggs.disconnect(_on_stat_change)
 	
 	$status.visible = true

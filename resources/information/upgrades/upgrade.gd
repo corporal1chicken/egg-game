@@ -6,10 +6,7 @@ class_name Upgrade
 @export var cost: float = 0.0
 @export var change: Dictionary = {
 	type = "",
-	data = {
-		type = "permenant",
-		stat = "",
-		value = "",
-		change_tyoe = ""
-	}
+	stat = "",
+	value = "",
+	change_type = ""	
 }

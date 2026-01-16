@@ -49,8 +49,6 @@ var original_values: Dictionary = {}
 var passive_egg_timer: Timer
 
 func _ready():
-	Signals.new_upgrade.connect(_on_upgrade)
-	
 	passive_egg_timer = Timer.new()
 	passive_egg_timer.wait_time = 1.0
 	passive_egg_timer.one_shot = false
@@ -59,23 +57,24 @@ func _ready():
 	
 	passive_egg_timer.timeout.connect(_on_passive_eggs)
 	
-func increase_eggs(gain_type: String, value: float, args: Array):
+func increase_eggs(gain_type: String, value: float, extra: Array):
 	var amount_to_add: float = 0.0
 	
 	match gain_type:
 		"click":
-			amount_to_add = (value * stats.click_multiplier)
-			
-			if args[0]:
-				amount_to_add += 5.0
-						
+			amount_to_add = (value * stats.click_multiplier)						
 		"auto":
 			amount_to_add = (value * stats.auto_multiplier)
 		"passive":
 			amount_to_add += value
 	
-	stats.total_eggs += (amount_to_add * stats.total_multiplier)
-	stats.lifetime_eggs += amount_to_add * stats.total_multiplier
+	for key in extra:
+		amount_to_add += key
+	
+	amount_to_add *= stats.total_multiplier
+	
+	stats.total_eggs += amount_to_add
+	stats.lifetime_eggs += amount_to_add
 	Signals.change_total_eggs.emit()
 		
 	_check_event()
@@ -92,65 +91,56 @@ func decrease_eggs(value: float):
 	stats.total_eggs -= value
 	Signals.change_total_eggs.emit()
 
-func _on_upgrade(change: Dictionary, cost: float):
-	decrease_eggs(cost)
-
-	match change.type:
-		"stat_change":
-			change_stats(change.stat, change.amount)
-		"unlock":
-			Signals.new_unlock.emit(change.gives)
-			
-			if change.gives == "autoegg":
-				stats.autoegg_unlocked = true
-
 func change_setting(setting: String, new_value):
 	settings[setting] = new_value
 
-func change_stats(stat_name, amount):
-	stats[stat_name] += amount
-
-func temporary_stat_change(change_data: Dictionary):
-	original_values[change_data.stat] = stats[change_data.stat]
-	
-	if change_data.change_type == "replace":
-		stats[change_data.stat] = float(change_data.value)
-	elif change_data.change_type == "addition":
-		stats[change_data.stat] += float(change_data.value)
-	elif change_data.change_type == "multiply":
-		stats[change_data.stat] *= float(change_data.value)
-	
-func revert_stat_change(change_data: Dictionary):
-	if not original_values.has(change_data.stat):
-		print("no stat found: %s" % [change_data.stat])
-		return
-
-	stats[change_data.stat] = original_values[change_data.stat]
-	
-func permenant_stat_change(change_data: Dictionary):
-	stats[change_data.stat] += change_data.value
-	
-func change_stat(change_data: Dictionary):
-	match change_data.type:
-		"permenant":
-			permenant_stat_change(change_data)
-		"temporary":
-			temporary_stat_change(change_data)
-
 func _on_passive_eggs():
 	increase_eggs("passive", 0.1, [])
-	
-func give_progression(type: String, data: Dictionary):
-	match type:
-		"upgrade":
-			pass
-		"boost":
-			pass
-		"achievement":
-			if data.key == "start_timer":
-				passive_egg_timer.start(2)
-		"milestone":
-			pass
+
+func process_boost(action: String, change: Dictionary):
+	if action == "start":
+		state.boost_active = true
 		
+		original_values[change.stat] = stats[change.stat]
+		_change_stat(change)
 	
+	if action == "end":
+		state.boost_active = false
+		
+		if not original_values.has(change.stat):
+			print("no stat found: %s" % [change.stat])
+			return
+
+		stats[change.stat] = original_values[change.stat]
+
 	pass
+
+func process_upgrade(change: Dictionary, cost: float):
+	decrease_eggs(cost)
+	
+	if change.type == "stat_change":
+		_change_stat(change)
+		
+	if change.type == "unlock":
+		Signals.new_unlock.emit(change.gives)
+			
+		if change.gives == "autoegg":
+			stats.autoegg_unlocked = true
+	
+func process_achievement(change: Dictionary):
+	if change.key == "passive_egg_unlock":
+		passive_egg_timer.start(1)
+	
+func _change_stat(change: Dictionary):
+	match change.change_type:
+		"replace":
+			stats[change.stat] = float(change.value)
+		"addition":
+			stats[change.stat] += float(change.value)
+		"multiply":
+			stats[change.stat] *= float(change.value)
+		"subtract":
+			stats[change.stat] -= float(change.value)
+
+func increase_clicks():
+	stats.lifetime_clicks += 1.0
