@@ -156,6 +156,7 @@ category = "clicker"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_cgkx7")
 })
+save_id = "special_click_upgrade"
 path = {
 &"cost": -1.0,
 "needs": "autoegg",
@@ -182,6 +183,7 @@ category = "autoegg"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_2sled")
 })
+save_id = "auto_amount_upgrade"
 path = {
 &"cost": -1.0,
 "needs": "autoegg",
@@ -208,6 +210,7 @@ category = "autoegg"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_c3nw6")
 })
+save_id = "auto_rate_uprade"
 path = {
 &"cost": -1.0,
 "needs": "autoegg",
@@ -234,11 +237,12 @@ category = "clicker"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_6a3ph")
 })
+save_id = "click_multiplier_upgrade"
 path = {
 &"cost": 70.0,
 &"text": "Unlock (70 eggs)",
 &"type": "purchase",
-&"unlocked": false
+&"unlocked": true
 }
 
 [node name="click_upgrade" parent="holder" instance=ExtResource("1_alr6r")]
@@ -259,6 +263,7 @@ category = "clicker"
 upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_g5i5g")
 })
+save_id = "click_upgrade"
 path = {
 &"cost": 0.0,
 &"text": "None Set",
@@ -285,6 +290,7 @@ upgrade_path = Dictionary[int, ExtResource("2_ba88x")]({
 0: SubResource("Resource_ep8w2")
 })
 max_upgrades = 1
+save_id = "autoegg_unlock"
 path = {
 &"cost": 0.0,
 &"text": "None Set",

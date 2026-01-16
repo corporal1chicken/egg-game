@@ -7,6 +7,7 @@ var spacing: int = 5
 # Godot Specific Functions
 func _ready():
 	Signals.change_total_eggs.connect(_on_change_total_eggs)
+	Signals.load_finished.connect(_on_load_finished)
 	
 	for button in $categories.get_children():
 		button.pressed.connect(_on_category_button.bind(button))
@@ -80,3 +81,6 @@ func _on_change_total_eggs():
 		$possible_upgrades.text = "(%d)" % [possible_upgrades]
 	else:
 		$possible_upgrades.visible = false
+
+func _on_load_finished():
+	_change_holder()

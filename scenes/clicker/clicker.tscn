@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0xvhxeo521u2"]
+[gd_scene load_steps=10 format=3 uid="uid://c0xvhxeo521u2"]
 
 [ext_resource type="Script" uid="uid://du4d411gkcehf" path="res://scenes/clicker/clicker.gd" id="1_3yhdj"]
 [ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_7l5xg"]
 [ext_resource type="StyleBox" uid="uid://lvy001rveyr4" path="res://resources/buttons/disabled.tres" id="3_8oacq"]
 [ext_resource type="PackedScene" uid="uid://kysw6653vp86" path="res://scenes/upgrades/upgrades.tscn" id="5_ep8w2"]
 [ext_resource type="PackedScene" uid="uid://co6fv2vrry7kw" path="res://scenes/boosts/boost_bar.tscn" id="6_ep8w2"]
+[ext_resource type="PackedScene" uid="uid://b6ux5k778uban" path="res://test_dummies.tscn" id="6_yg2tv"]
 
 [sub_resource type="Animation" id="Animation_umt6m"]
 length = 0.001
@@ -194,6 +195,17 @@ offset_right = 225.0
 offset_bottom = 79.0
 theme_override_font_sizes/font_size = 32
 text = "menu"
+
+[node name="test_dummies" parent="." instance=ExtResource("6_yg2tv")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -97.0
+offset_top = 59.0
+offset_right = -97.0
+offset_bottom = 59.0
+grow_horizontal = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

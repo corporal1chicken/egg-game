@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6ux5k778uban"]
+
+[ext_resource type="Script" uid="uid://ceff2mr5n8jqw" path="res://test_dummies.gd" id="1_7bff2"]
+
+[node name="test_dummies" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7bff2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="debug_save" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "debug_save"
+
+[node name="debug_load" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "debug_load"
+
+[node name="save1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "save_1"
+
+[node name="load1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "load_1"
+
+[node name="save2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "save_2"
+
+[node name="load2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "load_2
+"
+
+[connection signal="pressed" from="VBoxContainer/save1" to="." method="_on_save1_pressed"]
+[connection signal="pressed" from="VBoxContainer/load1" to="." method="_on_load1_pressed"]
+[connection signal="pressed" from="VBoxContainer/save2" to="." method="_on_save2_pressed"]
+[connection signal="pressed" from="VBoxContainer/load2" to="." method="_on_load2_pressed"]

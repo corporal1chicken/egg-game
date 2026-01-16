@@ -7,6 +7,7 @@ extends ColorRect
 @export var upgrade_index: int = 0
 @export var max_upgrades: int = 0
 @export var path_completed: bool = false
+@export var save_id: String = ""
 @export var path: Dictionary = {
 	unlocked = false,
 	cost = 0.0,
@@ -19,6 +20,8 @@ var current_upgrade: Upgrade
 
 # Built In Godot Functions
 func _ready() -> void:
+	add_to_group("upgrade_bars")
+	
 	Signals.new_unlock.connect(_check_dependency)
 	Signals.change_total_eggs.connect(_on_change_total_eggs)
 	
@@ -85,8 +88,8 @@ func _unlock_path():
 	path.unlocked = true
 	$path_level.visible = true
 	
-	$AnimationPlayer.play("unlocked_path")
-	await $AnimationPlayer.animation_finished
+	#$AnimationPlayer.play("unlocked_path")
+	#await $AnimationPlayer.animation_finished
 	$status.visible = false
 	$purchase.visible = false
 	if path.cost != -1.0:
@@ -106,3 +109,49 @@ func _on_change_total_eggs():
 	else:
 		can_upgrade = false
 		$path_level.add_theme_color_override("default_color", Color.WHITE)
+
+func get_save_data() -> Dictionary:
+	return {
+		"unlocked": path.unlocked,
+		"index": upgrade_index,
+		"completed": path_completed
+	}
+
+func apply_save_data(data: Dictionary):
+	path.unlocked = bool(data.get("unlocked", path.unlocked))
+	upgrade_index = int(data.get("index", upgrade_index))
+	path_completed = bool(data.get("completed", path_completed))
+	reload_ui()
+
+func reload_ui() -> void:
+	max_upgrades = upgrade_path.keys().size()
+	upgrade_index = clampi(upgrade_index, 0, max_upgrades)
+	path_completed = (upgrade_index >= max_upgrades) or path_completed
+
+	$status.visible = false
+	$purchase.visible = false
+	$path_level.visible = false
+
+	if path_completed:
+		$status.visible = true
+		$status.color = Color.GREEN
+		$status.color.a = 0.5
+		$status/label.text = "Path Completed!"
+		return
+
+	current_upgrade = upgrade_path.get(upgrade_index)
+	
+	if current_upgrade != null:
+		_update_upgrade_text()
+
+	if not path.unlocked:
+		if path.type == "dependency":
+			$status.visible = true
+			$status/label.text = path.text
+		else:
+			$purchase.visible = true
+			$purchase/unlock.text = path.text
+		return
+
+	$path_level.visible = true
+	_on_change_total_eggs()

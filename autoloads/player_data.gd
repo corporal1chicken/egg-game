@@ -126,6 +126,7 @@ func process_upgrade(change: Dictionary, cost: float):
 			
 		if change.gives == "autoegg":
 			stats.autoegg_unlocked = true
+
 	
 func process_achievement(change: Dictionary):
 	if change.key == "passive_egg_unlock":
@@ -144,3 +145,7 @@ func _change_stat(change: Dictionary):
 
 func increase_clicks():
 	stats.lifetime_clicks += 1.0
+
+func apply_loaded_info(target: Dictionary, loaded: Dictionary):
+	for key in loaded.keys():
+		target[key] = loaded[key]
