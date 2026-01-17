@@ -154,4 +154,4 @@ func reload_ui() -> void:
 		return
 
 	$path_level.visible = true
-	_on_change_total_eggs()
+	_on_change_total_eggs()	

@@ -17,6 +17,10 @@ func _on_save_1_pressed() -> void:
 	await $Timer.timeout
 	
 	var success: bool = SaveManager.load_slot(1)
+	
+	if not success:
+		SaveManager.new_slot(1)
+	
 	print("load1:", success)
 	Signals.change_screen.emit("choose_slot", "clicker")
 	_disable_buttons(false)
@@ -31,7 +35,19 @@ func _on_save_2_pressed() -> void:
 	await $Timer.timeout
 	
 	var success: bool = SaveManager.load_slot(2)
+	
+	if not success:
+		SaveManager.new_slot(2)
+	
 	print("load2:", success)
 	Signals.change_screen.emit("choose_slot", "clicker")
 	_disable_buttons(false)
 	$loading_text.visible = false
+
+func _on_delete_1_pressed() -> void:
+	var success: bool = SaveManager.delete_slot(1)
+	print("delete slot 1 success: ", success)
+
+func _on_delete_2_pressed() -> void:
+	var success: bool = SaveManager.delete_slot(2)
+	print("delete slot 2 success: ", success)

@@ -43,8 +43,11 @@ func _on_enable_auto_pressed():
 	else:
 		_enable_autoegg()
 		
-func _on_menu_pressed() -> void:
+func _on_menu_pressed():
 	Signals.change_screen.emit("clicker", "play_screen")
+
+func _on_save_pressed():
+	print("(menu button clicker) slot: ", str(SaveManager.current_slot))
 	var success: bool = SaveManager.save_slot(SaveManager.current_slot)
 	print("save:", success)
 

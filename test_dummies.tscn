@@ -1,6 +1,24 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6ux5k778uban"]
 
-[ext_resource type="Script" uid="uid://ceff2mr5n8jqw" path="res://test_dummies.gd" id="1_7bff2"]
+[sub_resource type="GDScript" id="GDScript_k1hum"]
+script/source = "extends Control
+
+func _on_save1_pressed() -> void:
+	var ok: bool = SaveManager.save_slot(1)
+	print(\"save1:\", ok)
+
+func _on_load1_pressed() -> void:
+	var ok: bool = SaveManager.load_slot(1)
+	print(\"load1:\", ok)
+
+func _on_save2_pressed() -> void:
+	var ok: bool = SaveManager.save_slot(2)
+	print(\"save2:\", ok)
+
+func _on_load2_pressed() -> void:
+	var ok: bool = SaveManager.load_slot(2)
+	print(\"load2:\", ok)
+"
 
 [node name="test_dummies" type="Control"]
 layout_mode = 3
@@ -11,7 +29,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7bff2")
+script = SubResource("GDScript_k1hum")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

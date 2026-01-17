@@ -11,7 +11,6 @@ extends ColorRect
 @export var tiers: Array[float]
 @export var tracking: bool = true
 @export var current_tier: int = 0
-@export var requirements: Dictionary = {}
 
 # Godot Specific Functions
 func _ready():
@@ -23,15 +22,13 @@ func _ready():
 		return
 	
 	Signals.change_total_eggs.connect(_on_stat_change)
-	Signals.new_unlock.connect(_check_requirements)
 	
 	$title.text = title
 	$description.text = description
 	$tier.text = "(%d/%d)" % [current_tier, tiers.size()]
 	$reward.text = reward.text
+	
 	_update_progress_text()
-		
-	pass
 
 # Helper Functions
 func _update_progress_text():
@@ -45,12 +42,6 @@ func _on_stat_change():
 	
 	if PlayerData.stats[stat_name] >= tiers[current_tier]:
 		_tier_completed()
-	
-	pass
-	
-func _check_requirements(unlock):
-	# Check new unlocks, e.g. autoegg
-	pass
 	
 func _tier_completed():
 	current_tier += 1
@@ -68,5 +59,3 @@ func _all_tiers_complete():
 	$status.color = Color.GREEN
 	$status.color.a = 0.5
 	$title.text = "[✓] %s" % [title]
-	
-	pass

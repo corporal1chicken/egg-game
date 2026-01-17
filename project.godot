@@ -21,6 +21,7 @@ ButtonStyles="*res://autoloads/button_styles.gd"
 Signals="*res://autoloads/signals.gd"
 PlayerData="*res://autoloads/player_data.gd"
 SaveManager="*res://autoloads/save_manager.gd"
+Constants="*res://autoloads/constants.gd"
 
 [gui]
 

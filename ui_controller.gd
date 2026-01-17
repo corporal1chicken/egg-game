@@ -7,6 +7,7 @@ func _ready() -> void:
 		child.pressed.connect(_on_option_pressed.bind(child.name))
 	
 	Signals.change_screen.connect(_on_change_screen)
+	Signals.load_finished.connect(_on_load_finished)
 	
 	$CanvasLayer/saving.visible = false
 
@@ -16,12 +17,16 @@ func _ready() -> void:
 func _on_option_pressed(option: String):
 	match option:
 		"play":
+			_on_change_screen("play_screen", "clicker")
+			var _success = SaveManager.load_slot(SaveManager.current_slot)
+		"load":
 			_on_change_screen("play_screen", "choose_slot")
 		"settings":
 			_on_change_screen("play_screen", "settings")
 		"achievements":
 			_on_change_screen("play_screen", "achievements")
 		"quit":
+			SaveManager.save_slot(SaveManager.current_slot)
 			get_tree().quit()
 
 func _on_change_screen(old_screen, new_screen):
@@ -34,10 +39,13 @@ func _on_save_started(slot: int) -> void:
 	$CanvasLayer/saving.visible = true
 	$CanvasLayer/saving.text = "saving slot %d" % slot
 	
-func _on_save_finished(slot: int, ok: bool) -> void:
+func _on_save_finished(slot: int, success: bool) -> void:
 	$CanvasLayer/saving.text = "saving finished"
 
 	$CanvasLayer/Timer.start()
+	
+func _on_load_finished():
+	$CanvasLayer/current_slot.text = "current slot: %d" % [SaveManager.current_slot]
 	
 func _on_timer_timeout() -> void:
 	$CanvasLayer/saving.visible = false

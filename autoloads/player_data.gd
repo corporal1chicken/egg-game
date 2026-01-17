@@ -149,3 +149,10 @@ func increase_clicks():
 func apply_loaded_info(target: Dictionary, loaded: Dictionary):
 	for key in loaded.keys():
 		target[key] = loaded[key]
+
+func reset_progress():
+	apply_loaded_info(stats, Constants.STATS)
+	apply_loaded_info(boosts, Constants.BOOSTS)
+	apply_loaded_info(events, Constants.EVENTS)
+	
+	Signals.change_total_eggs.emit()

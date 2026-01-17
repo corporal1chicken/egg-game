@@ -162,7 +162,7 @@ path = {
 "needs": "autoegg",
 &"text": "Needs Autoegg",
 &"type": "dependency",
-&"unlocked": true
+&"unlocked": false
 }
 
 [node name="auto_egg_amount2" parent="holder" instance=ExtResource("1_alr6r")]

@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://diu1vy2jjbv14"]
+[gd_scene load_steps=6 format=3 uid="uid://diu1vy2jjbv14"]
 
 [ext_resource type="Theme" uid="uid://ckvu3lovxb6qy" path="res://resources/themes/default.tres" id="1_kyb06"]
 [ext_resource type="Script" uid="uid://bt0y0rxtg21ii" path="res://scenes/choose_slot/choose_slot.gd" id="2_y7a7l"]
+[ext_resource type="Texture2D" uid="uid://d4b3v68cakxw1" path="res://images.jpg" id="3_isb53"]
+[ext_resource type="Texture2D" uid="uid://cv7iql2f1np5v" path="res://images/ui/bin.png" id="4_b85rm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icccl"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="choose_slot" type="Control"]
 layout_mode = 3
@@ -90,6 +104,81 @@ vertical_alignment = 1
 wait_time = 5.0
 one_shot = true
 
+[node name="teddy_moo" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -129.5
+offset_right = 264.0
+offset_bottom = 129.5
+grow_vertical = 2
+texture = ExtResource("3_isb53")
+
+[node name="delete_1" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = -47.0
+offset_right = 169.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_icccl")
+
+[node name="button" type="TextureButton" parent="delete_1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_b85rm")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="delete_2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = 7.0
+offset_right = 169.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_icccl")
+
+[node name="button" type="TextureButton" parent="delete_2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_b85rm")
+ignore_texture_size = true
+stretch_mode = 0
+
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="saves/save_1" to="." method="_on_save_1_pressed"]
 [connection signal="pressed" from="saves/save_2" to="." method="_on_save_2_pressed"]
+[connection signal="pressed" from="delete_1/button" to="." method="_on_delete_1_pressed"]
+[connection signal="pressed" from="delete_2/button" to="." method="_on_delete_2_pressed"]

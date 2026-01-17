@@ -197,6 +197,7 @@ theme_override_font_sizes/font_size = 32
 text = "menu"
 
 [node name="test_dummies" parent="." instance=ExtResource("6_yg2tv")]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -212,6 +213,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_g5i5g")
 }
 
+[node name="save" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 334.0
+offset_right = 1109.0
+offset_bottom = 385.0
+theme_override_font_sizes/font_size = 32
+text = "save"
+
 [connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]
 [connection signal="pressed" from="enable_auto" to="." method="_on_enable_auto_pressed"]
 [connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="save" to="." method="_on_save_pressed"]
